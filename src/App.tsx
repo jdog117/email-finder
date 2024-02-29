@@ -4,13 +4,11 @@ import viteLogo from "/vite.svg";
 import Header from "./components/helloworld";
 import "./App.css";
 
-import React from "react";
-
 function App() {
     const [count, setCount] = useState(0);
 
     return (
-        <React.Fragment>
+        <>
             <div>
                 <Header />
                 <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
@@ -36,7 +34,7 @@ function App() {
             <p className="read-the-docs">
                 Click on the Vite and React logos to learn more
             </p>
-        </React.Fragment>
+        </>
     );
 }
 
