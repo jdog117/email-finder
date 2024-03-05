@@ -2,6 +2,8 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import Header from "./components/helloworld";
+import Bar from "./components/SearchBar";
+//import RequestButton from "./components/RequestBar";
 import "./App.css";
 
 function App() {
@@ -10,7 +12,12 @@ function App() {
     return (
         <>
             <div>
+                <Bar />
+            </div>
+
+            <div>
                 <Header />
+
                 <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
                     <img src={viteLogo} className="logo" alt="Vite logo" />
                 </a>
