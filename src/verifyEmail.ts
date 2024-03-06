@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 import dns from "dns";
 import net from "net";
 import { promisify } from "util";
@@ -7,9 +5,13 @@ import { promisify } from "util";
 const lookup = promisify(dns.lookup);
 const resolveMx = promisify(dns.resolveMx);
 
+// UPDATE to return verified Email
+// ADD functionality to check with first, last, and first.last name
 async function verifyEmail(website: string, personName: string) {
     // Combine website and personName to form an email address
     const email = `${personName}@${website}`;
+    //const emailLastName = personName.split(" ")[1];
+    //const emailFirstName = personName.split(" ")[0];
 
     // Syntax check
     const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
@@ -65,35 +67,4 @@ async function verifyEmail(website: string, personName: string) {
     });
 }
 
-type RequestButtonProps = {
-    website: string;
-    personName: string;
-};
-
-const RequestButton: React.FC<RequestButtonProps> = ({
-    website,
-    personName,
-}) => {
-    const [response, setResponse] = useState<string>("");
-    const [error, setError] = useState<string | null>(null);
-
-    const handleClick = async () => {
-        try {
-            const data = await verifyEmail(website, personName);
-            setResponse(data !== undefined ? data : "");
-            setError(null);
-        } catch (err) {
-            setError((err as Error).message);
-        }
-    };
-
-    return (
-        <div>
-            <button onClick={handleClick}>Send Request</button>
-            {response && <div>{JSON.stringify(response)}</div>}
-            {error && <div>Error: {error}</div>}
-        </div>
-    );
-};
-
-export default RequestButton;
+export default verifyEmail;
