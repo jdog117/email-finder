@@ -3,8 +3,8 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import Header from "./components/helloworld";
 import Bar from "./components/SearchBar";
-//import RequestButton from "./components/RequestBar";
-import "./App.css";
+//import "./App.css";
+import "./globals.css";
 
 function App() {
     const [count, setCount] = useState(0);
