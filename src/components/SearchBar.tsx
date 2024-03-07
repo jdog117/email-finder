@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import verifyEmail from "@/verifyEmail";
+//import verifyEmail from "@/verifyEmail";
 
 function SearchBar() {
     const [website, setWebsite] = useState("");
@@ -22,8 +22,7 @@ function SearchBar() {
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        // Here you can handle the submission of the form
-        verifyEmail(website, employeeName);
+        //verifyEmail(website, employeeName);
     };
 
     return (
