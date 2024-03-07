@@ -1,23 +1,18 @@
 import "./index.css";
-import { BrowserRouter as Router } from "react-router-dom";
-import Header from "./components/helloworld";
+import { HashRouter, Route, Routes } from "react-router-dom"; // using hashrouter so that this can be deployed to a static CDN
+import Home from "@/pages/Home";
 import NavBar from "./components/NavBar";
-import SearchBar from "./components/SearchBar";
+import NotFound from "./pages/NotFound";
 
 function App() {
     return (
-        <>
-            <Router>
-                <NavBar />
-            </Router>
-            <div>
-                <Header />
-            </div>
-
-            <div>
-                <SearchBar />
-            </div>
-        </>
+        <HashRouter>
+            <NavBar />
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="*" element={<NotFound />} />
+            </Routes>
+        </HashRouter>
     );
 }
 
