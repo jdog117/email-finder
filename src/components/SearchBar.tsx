@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-//import verifyEmail from "@/verifyEmail";
+//import verifyEmail from "@/lib/verifyEmail";
 
 function SearchBar() {
     const [website, setWebsite] = useState("");
@@ -25,30 +25,35 @@ function SearchBar() {
         //verifyEmail(website, employeeName);
     };
 
+    // TRYING TO MAKE THIS FLEX CORRECTLY WHEN X IS SMASHED
     return (
-        <form
-            onSubmit={handleSubmit}
-            className="flex w-full max-w-sm items-center space-x-2"
-        >
-            <input
-                value={employeeName}
-                onChange={handleEmployeeNameChange}
-                className="flex h-10 border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                placeholder="Enter a full name"
-                type="text"
-            ></input>
-            <div className="flex-none h-10 border border-input bg-background px-3 py-2 ring-offset-background disabled:cursor-not-allowed disabled:opacity-50">
-                @
-            </div>
-            <input
-                value={website}
-                onChange={handleWebsiteChange}
-                className="flex h-10 border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                placeholder="company.com"
-                type="text"
-            ></input>
-            <Button type="submit">Find</Button>
-        </form>
+        <div className="w-1/2">
+            <form
+                onSubmit={handleSubmit}
+                className="flex w-full max-w-sm items-center space-x-2"
+            >
+                <input
+                    value={employeeName}
+                    onChange={handleEmployeeNameChange}
+                    className="flex-auto h-10 border border-input bg-background px-3 py-6 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    placeholder="Enter a full name"
+                    type="text"
+                ></input>
+                <div className="flex h-10 font-thin text-lg items-center justify-center border border-input bg-background px-3 py-6 ring-offset-background disabled:cursor-not-allowed disabled:opacity-50">
+                    @
+                </div>
+                <input
+                    value={website}
+                    onChange={handleWebsiteChange}
+                    className="flex-auto h-10 border border-input bg-background px-3 py-6 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    placeholder="company.com"
+                    type="text"
+                ></input>
+                <Button type="submit" className="py-6 px-6">
+                    Find
+                </Button>
+            </form>
+        </div>
     );
 }
 

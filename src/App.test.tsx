@@ -14,7 +14,7 @@ describe("App", () => {
             screen.getByRole("heading", {
                 level: 1,
             })
-        ).toHaveTextContent("Email Finder");
+        ).toHaveTextContent("EMAIL FINDER");
     });
 
     describe("render", () => {
