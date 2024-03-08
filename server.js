@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import verifyEmail from "src/lib/verifyEmail.ts";
+import verifyEmail from "./src/lib/verifyEmail-copy.js";
 
 const app = express();
 
@@ -10,10 +10,10 @@ app.get("/verifyEmail", async (req, res) => {
     const { website, personName } = req.query;
 
     try {
-        await verifyEmail(website, personName);
-        res.status(200).send("Email verified");
+        const verifiedEmail = await verifyEmail(website, personName);
+        res.status(200).send(verifiedEmail);
     } catch (error) {
-        res.status(500).send("Email verification failed: " + error.message);
+        res.status(400).send("Email verification failed: " + error.message);
     }
 });
 

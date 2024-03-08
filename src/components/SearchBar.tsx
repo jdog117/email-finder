@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 //import verifyEmail from "@/lib/verifyEmail";
 
-function SearchBar() {
+interface SearchBarProps {
+    setEmailResponse: (data: string) => void;
+}
+
+function SearchBar({ setEmailResponse }: SearchBarProps) {
     const [website, setWebsite] = useState("");
     const [employeeName, setEmployeeName] = useState("");
 
@@ -20,9 +24,13 @@ function SearchBar() {
         // validate input HERE
     };
 
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-        //verifyEmail(website, employeeName);
+        const response = await fetch(
+            `http://localhost:3001/verifyEmail?website=${website}&personName=${employeeName}`
+        );
+        const data = await response.text();
+        setEmailResponse(data);
     };
 
     // TRYING TO MAKE THIS FLEX CORRECTLY WHEN X IS SMASHED
