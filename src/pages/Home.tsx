@@ -1,15 +1,13 @@
 import SearchBar from "@/components/SearchBar";
-import Header from "@/components/helloworld";
 
 function Home() {
     return (
         <>
-            <div>
-                <Header />
-            </div>
-
-            <div>
-                <SearchBar />
+            <div className="flex flex-col items-center justify-center w-full h-screen">
+                <div>
+                    <h1 className="font-bold">Email Finder</h1>
+                    <SearchBar />
+                </div>
             </div>
         </>
     );

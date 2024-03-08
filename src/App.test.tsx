@@ -17,7 +17,6 @@ describe("App", () => {
         ).toHaveTextContent("Email Finder");
     });
 
-    // unit tests
     describe("render", () => {
         it("renders main page", () => {
             render(<WrappedApp />);

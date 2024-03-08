@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 const NavBar: React.FC = () => {
     return (
         <nav>
-            <div>
+            <div className="flex items-center p-4">
                 <Link to="/">
-                    <img src="logo.png" alt="Logo" />
+                    <img src="src/assets/react.svg" alt="Logo" />
                 </Link>
             </div>
         </nav>
