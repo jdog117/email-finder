@@ -3,7 +3,7 @@
 Enter person's name and company they work at and this site will return any working email addresses. \
 Using email format patterns based on a companie's size it guesses multiple emails and verifies them by hitting their mail servers. \
 This allows you to check if the guessed email address exists without having to send a blind one out.
-Check out the documention for how it works [here](docs/email-verification-doc.md).
+Check out the documention for the email verification process [here](docs/email-verification-doc.md).
 
 ## Project Motivation
 
@@ -46,10 +46,10 @@ export default {
 # Feature Requests
 
 -   Script that scrapes the domain for a relevant email
--   Linked in features
+-   LinkedIn sourcing features
 
 # Dev
 
 > npm run dev \
 > http://localhost:5173/ \
-> npm server.js
+> node server.js

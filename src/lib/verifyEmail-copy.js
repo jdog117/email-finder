@@ -5,9 +5,6 @@ import { promisify } from "util";
 const lookup = promisify(dns.lookup);
 const resolveMx = promisify(dns.resolveMx);
 
-// UPDATE to return verified Email
-// In the future will give an email based on size of company which tells us most common email format patterns
-
 async function verifyEmail(website, personName) {
     //const email = `${personName.split(' ').join('.').replace(/\s/g, "")}@${website}`; //first.last@website.com
 
@@ -18,7 +15,9 @@ async function verifyEmail(website, personName) {
     try {
         await lookup(website);
     } catch (error) {
-        throw new Error("Domain does not exist");
+        throw new Error(
+            "Domain does not exist, check your spelling or try another website."
+        );
     }
 
     // SMTP check
@@ -26,32 +25,43 @@ async function verifyEmail(website, personName) {
     const socket = net.createConnection(25, mxRecords[0].exchange);
 
     return new Promise((resolve, reject) => {
+        const timeout = 1000 * 10; // 10 seconds
         socket.setEncoding("ascii");
-
-        socket.setTimeout(5000, () => {
+        socket.setTimeout(timeout, () => {
             socket.end();
             reject(new Error("Connection timeout"));
         });
 
+        let step = 0;
+        let randomEmail = `random-${Math.random()}@${website}`;
+
         socket.on("data", (data) => {
-            if (data.startsWith("220")) {
-                // Send HELO command
+            if (data.startsWith("220") && step === 0) {
                 socket.write(`HELO ${website}\r\n`);
-                console.log("HELO", website);
-            } else if (data.startsWith("250")) {
-                // Send MAIL FROM command
+                step++;
+            } else if (data.startsWith("250") && step === 1) {
                 socket.write(`MAIL FROM:<>\r\n`);
-                console.log("MAIL FROM"); // spamming atm
-            } else if (data.startsWith("250 ")) {
-                // Send RCPT TO command
-                socket.write(`RCPT TO:<${emailFirstName}>\r\n`);
-                console.log("RCPT TO", emailFirstName);
-            } else if (data.startsWith("250") || data.startsWith("251")) {
-                // Email exists
+                step++;
+            } else if (data.startsWith("250") && step === 2) {
+                socket.write(`RCPT TO:<${randomEmail}>\r\n`);
+                step++;
+            } else if (
+                (data.startsWith("250") || data.startsWith("251")) &&
+                step === 3
+            ) {
                 socket.end();
-                resolve(emailFirstName); // returns verified email
+                resolve("accepts all");
+            } else if (step === 3) {
+                // Server does not accept all emails, proceed with normal verification
+                socket.write(`RCPT TO:<${emailFirstName}>\r\n`);
+                step++;
+            } else if (
+                (data.startsWith("250") || data.startsWith("251")) &&
+                step === 4
+            ) {
+                socket.end();
+                resolve(emailFirstName); // email exists
             } else {
-                // Email does not exist
                 socket.end();
                 reject(new Error("Email does not exist"));
             }
@@ -66,9 +76,10 @@ async function verifyEmail(website, personName) {
 
 export default verifyEmail;
 
-verifyEmail("theepochtimes.com", "piron")
-    .then((email) => console.log("Email exists:", email))
-    .catch((error) => console.error("Error:", error.message));
+// for testing
+// verifyEmail("", "")
+//     .then((email) => console.log("Email exists:", email))
+//     .catch((error) => console.error("Error:", error.message));
 
 // Example response from hunter.io
 // https://api.hunter.io/v2/email-verifier?email=piron@theepochtimes.com&api_key=*******
