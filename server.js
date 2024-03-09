@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import verifyEmail from "./src/lib/verifyEmail-copy.js";
+import verifyEmail from "./src/lib/verifyEmail.js";
 
 const app = express();
 
