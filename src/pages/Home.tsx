@@ -7,7 +7,7 @@ function Home() {
         <>
             <div className="flex flex-col items-center justify-center w-full pt-8">
                 <div>
-                    <h1 className="font-bold py-3 text-lg">EMAIL FINDER</h1>
+                    {/* <h1 className="font-bold py-3 text-lg">EMAIL FINDER</h1> */}
                     <SearchBar setEmailResponse={setEmailResponse} />
                     <div className="py-3">{emailResponse}</div>
                 </div>

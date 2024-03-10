@@ -3,16 +3,17 @@ import { HashRouter, Route, Routes } from "react-router-dom"; // using hashroute
 import Home from "@/pages/Home";
 import NavBar from "./components/NavBar";
 import NotFound from "./pages/NotFound";
+import { ThemeProvider } from "@/components/theme-provider";
 
 export function App() {
     return (
-        <>
+        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
             <NavBar />
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
-        </>
+        </ThemeProvider>
     );
 }
 
