@@ -1,10 +1,11 @@
 import express from "express";
 import cors from "cors";
-import verifyEmail from "./src/lib/verifyEmail.js";
+import { verifyEmail } from "./src/lib/verifyEmail.js";
 
 const app = express();
 
 app.use(cors());
+app.use(express.json());
 
 app.get("/verifyEmail", async (req, res) => {
     const { website, personName } = req.query;

@@ -12,9 +12,9 @@ describe("App", () => {
         //EXPECT
         expect(
             screen.getByRole("heading", {
-                level: 1,
+                level: 2,
             })
-        ).toHaveTextContent("EMAIL FINDER");
+        ).toHaveTextContent("SEARCH");
     });
 
     describe("render", () => {
