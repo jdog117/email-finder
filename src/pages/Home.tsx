@@ -5,7 +5,7 @@ function Home() {
     const [emailResponse, setEmailResponse] = useState("");
     return (
         <>
-            <div className="flex flex-col items-center justify-center w-full pt-8">
+            <div className="flex bg-[#F7F9FA] dark:bg-zinc-900 h-screen flex-col items-center w-full pt-8">
                 <div>
                     {/* <h1 className="font-bold py-3 text-lg">EMAIL FINDER</h1> */}
                     <SearchBar setEmailResponse={setEmailResponse} />

@@ -4,6 +4,7 @@ import Home from "@/pages/Home";
 import NavBar from "./components/NavBar";
 import NotFound from "./pages/NotFound";
 import { ThemeProvider } from "@/components/theme-provider";
+import About from "./pages/About";
 
 export function App() {
     return (
@@ -12,6 +13,7 @@ export function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="*" element={<NotFound />} />
+                <Route path="/about" element={<About />} />
             </Routes>
         </ThemeProvider>
     );
