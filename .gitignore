@@ -1,5 +1,6 @@
 package-lock.json
 env.js
+server.js
 
 # Logs
 logs

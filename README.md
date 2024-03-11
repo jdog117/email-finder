@@ -12,7 +12,7 @@ I created this site to aid me with my job search. Often, if I need to contact a 
 There are a few sites out there that help you find an email such as Hunter.io, what this project is based on, however they only give a limited number of searches before you have to pull out your credit card. \
 I thought to myself, "they are probably just pinging the company's domain to check if their guessed email exists, I could probably right an app to do that for me for free." And so birthed this project!
 
-# React + TypeScript + Vite
+# React + TypeScript + Vite + Vercel
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
@@ -42,6 +42,10 @@ export default {
 -   Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 -   Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 -   Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+## Hosting
+
+This site is hosted on Vercel and has an express server connected to a Vercel serverless function for email verification
 
 # Feature Requests
 
