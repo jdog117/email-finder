@@ -45,8 +45,7 @@ export default {
 
 # Feature Requests
 
--   Script that scrapes the domain for a relevant email
--   LinkedIn sourcing features
+-   Offer suggestion email based on company size
 
 # Dev
 

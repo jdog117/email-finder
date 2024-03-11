@@ -4,10 +4,10 @@ function About() {
             <div className="max-w-lg">
                 <h1 className="text-4xl font-bold font-mono mb-4">About</h1>
                 <p className="text-sm font-mono">
-                    I created this site to help me on my job search. Often, if I
-                    need to contact a recruiter and employee at a company I'm
-                    looking to apply to, its hard to get their info, even
-                    messaging on LinkedIn. I also send cold emails and this is
+                    I created this site to aid me with my job search. Often, if
+                    I need to contact a recruiter and employee at a company I'm
+                    looking to apply to, it's hard to get their info or even
+                    messaging on LinkedIn. I also use cold emailing and thus
                     another reason I may need a person's email address.
                 </p>
                 <p className="my-3 text-sm font-mono">

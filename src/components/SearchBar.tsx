@@ -4,9 +4,10 @@ import { Button } from "@/components/ui/button";
 
 interface SearchBarProps {
     setEmailResponse: (data: string) => void;
+    setWebsiteResponse: (data: string) => void;
 }
 
-function SearchBar({ setEmailResponse }: SearchBarProps) {
+function SearchBar({ setEmailResponse, setWebsiteResponse }: SearchBarProps) {
     const [website, setWebsite] = useState("");
     const [employeeName, setEmployeeName] = useState("");
 
@@ -31,6 +32,7 @@ function SearchBar({ setEmailResponse }: SearchBarProps) {
         );
         const data = await response.text();
         setEmailResponse(data);
+        setWebsiteResponse(website.split(".")[0]);
     };
 
     // TRYING TO MAKE THIS FLEX CORRECTLY WHEN X IS SMASHED

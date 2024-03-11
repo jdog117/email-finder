@@ -5,6 +5,7 @@ import { ErrorCard } from "@/components/ui/errorCard";
 
 function Home() {
     const [emailResponse, setEmailResponse] = useState("");
+    const [websiteResponse, setWebsiteResponse] = useState("");
 
     const getResponseMessage = (response: string) => {
         switch (response) {
@@ -13,9 +14,13 @@ function Home() {
                     <Card>
                         <div className="p-5">
                             <p>
-                                This server accepts all emails so the email
-                                can't be verified. Based on the size of the
-                                company, the email is likely:
+                                Email cannot be verified because{" "}
+                                {websiteResponse} servers accept all emails
+                            </p>
+                            <div className="border mt-5 "></div>
+                            <p className="text-slate-500 text-sm mt-3">
+                                Currently implementing feature to suggest an
+                                email based on company size
                             </p>
                         </div>
                     </Card>
@@ -54,7 +59,10 @@ function Home() {
         <div className="flex bg-[#F7F9FA] dark:bg-zinc-900 h-screen flex-col items-center w-full pt-8">
             <div className="w-3/5">
                 {/* <h1 className="font-bold py-3 text-lg">EMAIL FINDER</h1> */}
-                <SearchBar setEmailResponse={setEmailResponse} />
+                <SearchBar
+                    setEmailResponse={setEmailResponse}
+                    setWebsiteResponse={setWebsiteResponse}
+                />
                 {emailResponse && getResponseMessage(emailResponse)}
             </div>
         </div>
