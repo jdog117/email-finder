@@ -39,7 +39,7 @@ function Home() {
             case "no domain":
                 return (
                     <ErrorCard>
-                        <div className="p-3 items-center flex flex-row">
+                        <div className="p-3 items-center flex flex-row dark:bg-red-900 dark:text-red-50">
                             <AlertCircle
                                 strokeWidth="1"
                                 color="red"
@@ -65,7 +65,7 @@ function Home() {
     };
     return (
         <div className="flex bg-[#F7F9FA] dark:bg-zinc-900 h-screen flex-col items-center w-full pt-8">
-            <div className="w-3/5">
+            <div className="w-3/6">
                 <div className="relative">
                     <HelpCircle
                         className="relative"

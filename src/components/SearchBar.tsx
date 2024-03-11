@@ -26,13 +26,17 @@ function SearchBar({ setEmailResponse, setWebsiteResponse }: SearchBarProps) {
     };
 
     const handleSubmit = async (event: React.FormEvent) => {
-        event.preventDefault();
-        const response = await fetch(
-            `http://localhost:3001/verifyEmail?website=${website}&personName=${employeeName}`
-        );
-        const data = await response.text();
-        setEmailResponse(data);
-        setWebsiteResponse(website.split(".")[0]);
+        if (website === "" || employeeName === "") {
+            return;
+        } else {
+            event.preventDefault();
+            const response = await fetch(
+                `http://localhost:3001/verifyEmail?website=${website}&personName=${employeeName}`
+            );
+            const data = await response.text();
+            setEmailResponse(data);
+            setWebsiteResponse(website.split(".")[0]);
+        }
     };
 
     // TRYING TO MAKE THIS FLEX CORRECTLY WHEN X IS SMASHED

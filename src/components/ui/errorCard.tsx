@@ -9,7 +9,7 @@ const ErrorCard = React.forwardRef<
     <div
         ref={ref}
         className={cn(
-            "rounded-sm border bg-red-50 border-red-400 text-slate-500 text-sm shadow-sm",
+            "rounded-sm border bg-red-50 border-red-400 text-slate-500 text-sm shadow-sm  dark:border-red-500",
             className
         )}
         {...props}
