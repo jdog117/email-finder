@@ -2,10 +2,13 @@ import SearchBar from "@/components/SearchBar";
 import { Card } from "@/components/ui/card";
 import { useState } from "react";
 import { ErrorCard } from "@/components/ui/errorCard";
+import { AlertCircle, HelpCircle } from "lucide-react";
+import Help from "@/components/Help";
 
 function Home() {
     const [emailResponse, setEmailResponse] = useState("");
     const [websiteResponse, setWebsiteResponse] = useState("");
+    const [isPopupVisible, setIsPopupVisible] = useState(false);
 
     const getResponseMessage = (response: string) => {
         switch (response) {
@@ -36,8 +39,13 @@ function Home() {
             case "no domain":
                 return (
                     <ErrorCard>
-                        <div className="p-3">
-                            <p>
+                        <div className="p-3 items-center flex flex-row">
+                            <AlertCircle
+                                strokeWidth="1"
+                                color="red"
+                                size={17}
+                            />
+                            <p className="px-3 py-1">
                                 Domain does not exist, check spelling or try
                                 another website
                             </p>
@@ -58,7 +66,21 @@ function Home() {
     return (
         <div className="flex bg-[#F7F9FA] dark:bg-zinc-900 h-screen flex-col items-center w-full pt-8">
             <div className="w-3/5">
-                {/* <h1 className="font-bold py-3 text-lg">EMAIL FINDER</h1> */}
+                <div className="relative">
+                    <HelpCircle
+                        className="relative"
+                        strokeWidth="1"
+                        size={17}
+                        onClick={() =>
+                            setIsPopupVisible(
+                                (prevIsPopupVisible) => !prevIsPopupVisible
+                            )
+                        }
+                    />
+                    {isPopupVisible && (
+                        <Help onClose={() => setIsPopupVisible(false)} />
+                    )}
+                </div>
                 <SearchBar
                     setEmailResponse={setEmailResponse}
                     setWebsiteResponse={setWebsiteResponse}

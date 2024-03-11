@@ -1,6 +1,6 @@
 # Email Finder
 
-Enter person's name and company they work at and this site will return any working email addresses. \
+Email Finder uses an employee name and company to find that employee's email address. \
 Using email format patterns based on a companie's size it guesses multiple emails and verifies them by hitting their mail servers. \
 This allows you to check if the guessed email address exists without having to send a blind one out.
 Check out the documention for the email verification process [here](docs/email-verification-doc.md).
