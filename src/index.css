@@ -59,7 +59,3 @@
         @apply bg-background text-foreground;
     }
 }
-
-body {
-    background-color: var(--background);
-}

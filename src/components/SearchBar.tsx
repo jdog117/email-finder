@@ -31,7 +31,7 @@ function SearchBar({ setEmailResponse, setWebsiteResponse }: SearchBarProps) {
         } else {
             event.preventDefault();
             const response = await fetch(
-                `http://localhost:3001/verifyEmail?website=${website}&personName=${employeeName}`
+                `/verifyEmail?website=${website}&personName=${employeeName}`
             );
             const data = await response.text();
             setEmailResponse(data);

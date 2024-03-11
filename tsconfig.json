@@ -13,8 +13,8 @@
         },
 
         /* Bundler mode */
-        "moduleResolution": "bundler",
-        "allowImportingTsExtensions": true,
+        "moduleResolution": "node",
+        "allowJs": true,
         "resolveJsonModule": true,
         "isolatedModules": true,
         "noEmit": true,
