@@ -10,7 +10,7 @@ function Home() {
         switch (response) {
             case "accepts all":
                 return (
-                    <Card className="">
+                    <Card>
                         <div className="p-5">
                             <p>
                                 This server accepts all emails so the email
@@ -22,7 +22,7 @@ function Home() {
                 );
             case "not exist":
                 return (
-                    <Card className="">
+                    <Card>
                         <div className="p-5">
                             <p>Can't find email for this employee</p>
                         </div>
@@ -41,7 +41,7 @@ function Home() {
                 );
             default:
                 return (
-                    <Card className="">
+                    <Card>
                         <div className="p-5">
                             <p>Email verified!</p>
                             {emailResponse}
@@ -51,15 +51,13 @@ function Home() {
         }
     };
     return (
-        <>
-            <div className="flex bg-[#F7F9FA] dark:bg-zinc-900 h-screen flex-col items-center w-full pt-8">
-                <div className="max-w-xl">
-                    {/* <h1 className="font-bold py-3 text-lg">EMAIL FINDER</h1> */}
-                    <SearchBar setEmailResponse={setEmailResponse} />
-                    {getResponseMessage(emailResponse)}
-                </div>
+        <div className="flex bg-[#F7F9FA] dark:bg-zinc-900 h-screen flex-col items-center w-full pt-8">
+            <div className="w-3/5">
+                {/* <h1 className="font-bold py-3 text-lg">EMAIL FINDER</h1> */}
+                <SearchBar setEmailResponse={setEmailResponse} />
+                {emailResponse && getResponseMessage(emailResponse)}
             </div>
-        </>
+        </div>
     );
 }
 
