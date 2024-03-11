@@ -39,7 +39,7 @@ function SearchBar({ setEmailResponse }: SearchBarProps) {
             <input
                 value={employeeName}
                 onChange={handleEmployeeNameChange}
-                className="flex-auto h-10 border border-input bg-background px-3 py-8 text-sm  file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none  disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex-auto h-10 border border-input bg-background rounded-l-sm px-3 py-8 text-sm  file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none  disabled:cursor-not-allowed disabled:opacity-50"
                 placeholder="employee name"
                 type="text"
             ></input>
@@ -49,11 +49,11 @@ function SearchBar({ setEmailResponse }: SearchBarProps) {
             <input
                 value={website}
                 onChange={handleWebsiteChange}
-                className="flex-auto h-10 border border-input bg-background px-3 py-8 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none  disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex-auto h-10 border border-input bg-background rounded-r-sm px-3 py-8 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none  disabled:cursor-not-allowed disabled:opacity-50"
                 placeholder="company.com"
                 type="text"
             ></input>
-            <Button type="submit" className="py-8 px-6 ml-3">
+            <Button type="submit" className="py-8 px-6 ml-3 ">
                 Find
             </Button>
         </form>

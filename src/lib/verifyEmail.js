@@ -14,9 +14,7 @@ export async function verifyEmail(website, personName) {
     try {
         await lookup(website);
     } catch (error) {
-        throw new Error(
-            "Domain does not exist, check your spelling or try another website."
-        );
+        throw new Error("no domain");
     }
 
     // SMTP check
@@ -62,7 +60,7 @@ export async function verifyEmail(website, personName) {
                 resolve(emailFirstName); // email exists
             } else {
                 socket.end();
-                reject(new Error("Email does not exist"));
+                reject(new Error("not exist"));
             }
         });
 

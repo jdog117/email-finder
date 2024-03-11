@@ -14,7 +14,7 @@ app.get("/verifyEmail", async (req, res) => {
         const verifiedEmail = await verifyEmail(website, personName);
         res.status(200).send(verifiedEmail);
     } catch (error) {
-        res.status(400).send("Email verification failed: " + error.message);
+        res.status(400).send(error.message);
     }
 });
 
