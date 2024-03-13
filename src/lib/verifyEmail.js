@@ -7,6 +7,7 @@ const resolveMx = promisify(dns.resolveMx);
 export async function verifyEmail(website, personName) {
     //const email = `${personName.split(' ').join('.').replace(/\s/g, "")}@${website}`; //first.last@website.com
 
+    let verifyResponse = {};
     const emailFirstName = `${personName.split(" ")[0]}@${website}`; // first@website.com
     console.log(emailFirstName);
 
@@ -47,6 +48,14 @@ export async function verifyEmail(website, personName) {
                 step === 3
             ) {
                 socket.end();
+                verifyResponse = {
+                    error: false,
+                    success: true,
+                    message: {
+                        email: emailFirstName,
+                        acceptsAll: true,
+                    },
+                };
                 resolve("accepts all");
             } else if (step === 3) {
                 // Server does not accept all emails, proceed with normal verification
@@ -60,12 +69,24 @@ export async function verifyEmail(website, personName) {
                 resolve(emailFirstName); // email exists
             } else {
                 socket.end();
+                verifyResponse = {
+                    error: false,
+                    success: true,
+                    message: {
+                        emailExists: false,
+                    },
+                };
                 reject(new Error("not exist"));
             }
         });
 
         socket.on("error", (error) => {
             socket.end();
+            verifyResponse = {
+                error: true,
+                success: false,
+                message: error,
+            };
             reject(error);
         });
     });
