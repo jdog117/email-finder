@@ -12,9 +12,10 @@ app.get("/verifyEmail", async (req, res) => {
 
     try {
         const verifiedEmail = await verifyEmail(website, personName);
-        res.status(200).send(verifiedEmail);
+        console.log(verifiedEmail);
+        res.status(200).json(verifiedEmail);
     } catch (error) {
-        res.status(400).send(error.message);
+        res.status(400).json(error.message);
     }
 });
 

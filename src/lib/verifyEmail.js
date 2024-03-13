@@ -24,7 +24,7 @@ export async function verifyEmail(website, personName) {
                 body: "Domain does not exist, check spelling or try another website",
             },
         };
-        throw verifyResponse;
+        return verifyResponse;
     }
 
     // SMTP check
@@ -123,39 +123,6 @@ export async function verifyEmail(website, personName) {
         });
     });
 }
-
-// for testing
-// verifyEmail("", "")
-//     .then((email) => console.log("Email exists:", email))
-//     .catch((error) => console.error("Error:", error.message));
-
-// Example response from hunter.io
-// https://api.hunter.io/v2/email-verifier?email=piron@theepochtimes.com&api_key=*******
-
-// {
-//     "data": {
-//       "status": "accept_all",
-//       "result": "risky",
-//       "_deprecation_notice": "Using result is deprecated, use status instead",
-//       "score": 73,
-//       "email": "piron@theepochtimes.com",
-//       "regexp": true,
-//       "gibberish": false,
-//       "disposable": false,
-//       "webmail": false,
-//       "mx_records": true,
-//       "smtp_server": true,
-//       "smtp_check": true,
-//       "accept_all": true,
-//       "block": false,
-//       "sources": []
-//     },
-//     "meta": {
-//       "params": {
-//         "email": "piron@theepochtimes.com"
-//       }
-//     }
-//   }
 
 /* Function doesnt work right now because linkedin wont return a body, probably detects this as programatic access */
 // export async function getCompanySize(companyName, apiKey, searchEngineId) {

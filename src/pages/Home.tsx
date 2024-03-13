@@ -34,6 +34,10 @@ function Home() {
                 />
             );
         } else if (response.success) {
+            //       "mx_records": true,
+            //       "smtp_server": true,
+            //       "smtp_check": true,
+            //       "accept_all": true,
             return (
                 <Lead
                     message={response.message.body}

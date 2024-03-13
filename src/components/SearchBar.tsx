@@ -44,6 +44,8 @@ function SearchBar({ setEmailResponse, setWebsiteResponse }: SearchBarProps) {
                 `/verifyEmail?website=${website}&personName=${employeeName}`
             );
             const data = await response.json(); // IF SHIT HITS THE FAN CHECK HERE
+            console.log("search");
+            console.log(data);
             setEmailResponse(data);
             setWebsiteResponse(website.split(".")[0]);
         }
