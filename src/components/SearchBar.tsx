@@ -2,8 +2,18 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 //import verifyEmail from "@/lib/verifyEmail";
 
+interface Response {
+    error: boolean;
+    success: boolean;
+    message: {
+        email: string;
+        acceptsAll: boolean;
+        body: string;
+    };
+}
+
 interface SearchBarProps {
-    setEmailResponse: (data: string) => void;
+    setEmailResponse: (data: Response) => void;
     setWebsiteResponse: (data: string) => void;
 }
 
@@ -33,7 +43,7 @@ function SearchBar({ setEmailResponse, setWebsiteResponse }: SearchBarProps) {
             const response = await fetch(
                 `/verifyEmail?website=${website}&personName=${employeeName}`
             );
-            const data = await response.text();
+            const data = await response.json(); // IF SHIT HITS THE FAN CHECK HERE
             setEmailResponse(data);
             setWebsiteResponse(website.split(".")[0]);
         }

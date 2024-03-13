@@ -15,19 +15,37 @@ export async function verifyEmail(website, personName) {
     try {
         await lookup(website);
     } catch (error) {
-        throw new Error("no domain");
+        verifyResponse = {
+            error: true,
+            success: false,
+            message: {
+                email: "",
+                acceptsAll: false,
+                body: "Domain does not exist, check spelling or try another website",
+            },
+        };
+        throw verifyResponse;
     }
 
     // SMTP check
     const mxRecords = await resolveMx(website);
     const socket = net.createConnection(25, mxRecords[0].exchange);
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         const timeout = 1000 * 10; // 10 seconds
         socket.setEncoding("ascii");
         socket.setTimeout(timeout, () => {
             socket.end();
-            reject(new Error("Connection timeout"));
+            verifyResponse = {
+                error: true,
+                success: false,
+                message: {
+                    email: "",
+                    acceptsAll: false,
+                    body: "Can't verify email address. Connection to server timed out.",
+                },
+            };
+            resolve(verifyResponse);
         });
 
         let step = 0;
@@ -54,9 +72,10 @@ export async function verifyEmail(website, personName) {
                     message: {
                         email: emailFirstName,
                         acceptsAll: true,
+                        body: "",
                     },
                 };
-                resolve("accepts all");
+                resolve(verifyResponse); // accepts all
             } else if (step === 3) {
                 // Server does not accept all emails, proceed with normal verification
                 socket.write(`RCPT TO:<${emailFirstName}>\r\n`);
@@ -66,7 +85,16 @@ export async function verifyEmail(website, personName) {
                 step === 4
             ) {
                 socket.end();
-                resolve(emailFirstName); // email exists
+                verifyResponse = {
+                    error: false,
+                    success: true,
+                    message: {
+                        email: emailFirstName,
+                        acceptsAll: false,
+                        body: "",
+                    },
+                };
+                resolve(verifyResponse); // email exists
             } else {
                 socket.end();
                 verifyResponse = {
@@ -76,7 +104,7 @@ export async function verifyEmail(website, personName) {
                         emailExists: false,
                     },
                 };
-                reject(new Error("not exist"));
+                resolve(verifyResponse);
             }
         });
 
@@ -85,9 +113,13 @@ export async function verifyEmail(website, personName) {
             verifyResponse = {
                 error: true,
                 success: false,
-                message: error,
+                message: {
+                    email: "",
+                    acceptsAll: false,
+                    body: error.message,
+                },
             };
-            reject(error);
+            resolve(verifyResponse);
         });
     });
 }
