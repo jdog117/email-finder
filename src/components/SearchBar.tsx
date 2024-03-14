@@ -9,7 +9,7 @@ interface Response {
         email: string;
         acceptsAll: boolean;
         body: string;
-        fullNam: string;
+        fullName: string;
     };
 }
 
@@ -56,17 +56,17 @@ function SearchBar({ setEmailResponse, setWebsiteResponse }: SearchBarProps) {
             <input
                 value={employeeName}
                 onChange={handleEmployeeNameChange}
-                className="flex-auto h-10 border border-input bg-background rounded-l-sm px-3 py-8 text-sm  file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none  disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex-initial w-60 h-10 border border-input bg-background rounded-l-sm px-3 py-8 text-sm placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed"
                 placeholder="employee name"
                 type="text"
             ></input>
-            <div className="flex h-10 font-thin text-lg items-center justify-center border border-input bg-background px-4 py-8 ring-offset-background disabled:cursor-not-allowed disabled:opacity-50">
+            <div className="flex h-10 font-thin text-lg items-center justify-center border border-input bg-background px-4 py-8 disabled:cursor-not-allowed">
                 @
             </div>
             <input
                 value={website}
                 onChange={handleWebsiteChange}
-                className="flex-auto h-10 border border-input bg-background rounded-r-sm px-3 py-8 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none  disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex-initial w-60 h-10 border border-input bg-background rounded-r-sm px-3 py-8 text-sm placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed"
                 placeholder="company.com"
                 type="text"
             ></input>
