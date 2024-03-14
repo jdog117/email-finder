@@ -1,6 +1,17 @@
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { CheckCircle2 } from "lucide-react";
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface LeadProps {
     message: string;
@@ -15,7 +26,10 @@ export default function Lead({ message, email, name, acceptsAll }: LeadProps) {
         .map((part) => part[0])
         .join("")
         .toUpperCase();
-
+    const capFullName = name.replace(
+        /\w\S*/g,
+        (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+    );
     return (
         //change two columns
         <Card className="w-full">
@@ -27,18 +41,51 @@ export default function Lead({ message, email, name, acceptsAll }: LeadProps) {
                 </Avatar>
 
                 <div className="w-full">
-                    <h1 className="font-semibold">{name}</h1>
+                    <h1 className="font-semibold text-lg">{capFullName}</h1>
                     <p>{message}</p>
                     <div className="flex flex-row justify-start items-center">
-                        <p className="">{email}</p>
-                        <CheckCircle2
-                            className="mt-1 ml-2"
-                            color="green"
-                            size={15}
-                        />
+                        <TooltipProvider>
+                            <Tooltip>
+                                <TooltipTrigger>
+                                    <p
+                                        onClick={() =>
+                                            navigator.clipboard.writeText(email)
+                                        }
+                                    >
+                                        {email}
+                                    </p>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    <p>Click to copy</p>
+                                </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
+                        <div className="mt-1 ml-2">
+                            {email && (
+                                <Popover>
+                                    <PopoverTrigger>
+                                        <CheckCircle2
+                                            color={
+                                                acceptsAll ? "orange" : "green"
+                                            }
+                                            size={15}
+                                        />
+                                    </PopoverTrigger>
+                                    <PopoverContent className="w-auto">
+                                        {/* prettier-ignore */}
+                                        <p>
+                                        MX Records:&nbsp;&nbsp;<span className="text-green-700">PASS</span> <br />
+                                        SMPT Server: <span className="text-green-700">PASS</span> <br />
+                                        SMTP Check: <span className="text-green-700">PASS</span> <br />
+                                        Accept All:&nbsp;&nbsp;&nbsp;&nbsp;<span className={acceptsAll ? "text-orange-400" : "text-green-700"}>{acceptsAll ? "TRUE" : "FALSE"}</span>
+                                    </p>
+                                    </PopoverContent>
+                                </Popover>
+                            )}
+                        </div>
                     </div>
                     {acceptsAll && (
-                        <p className="font-thin">Accepts all broski</p>
+                        <p className="font-thin">Email is accept all</p>
                     )}
                 </div>
             </div>

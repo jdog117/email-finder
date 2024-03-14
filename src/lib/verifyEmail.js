@@ -105,7 +105,7 @@ export async function verifyEmail(website, personName) {
                     message: {
                         email: "",
                         acceptsAll: false,
-                        body: "Email doesn't exist",
+                        body: "Can't verify an email for this person",
                         fullName: personName,
                     },
                 };

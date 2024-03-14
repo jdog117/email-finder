@@ -2,8 +2,12 @@ import SearchBar from "@/components/SearchBar";
 import { useState } from "react";
 import { ErrorCard } from "@/components/ui/errorCard";
 import { AlertCircle, HelpCircle } from "lucide-react";
-import Help from "@/components/Help";
 import Lead from "@/components/Lead";
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover";
 
 function Home() {
     interface Response {
@@ -20,7 +24,6 @@ function Home() {
     const [verificationResponse, setEmailResponse] = useState<Response | null>(
         null
     );
-    const [isPopupVisible, setIsPopupVisible] = useState(false);
 
     const getResponseMessage = (response: Response) => {
         if (response.error) {
@@ -33,10 +36,6 @@ function Home() {
                 </ErrorCard>
             );
         } else if (response.success) {
-            //       "mx_records": true,
-            //       "smtp_server": true,
-            //       "smtp_check": true,
-            //       "accept_all": true,
             return (
                 <Lead
                     message={response.message.body}
@@ -46,75 +45,20 @@ function Home() {
                 />
             );
         }
-
-        //     switch (response) {
-        //         case "accepts all":
-        //             return (
-        //                 <Card>
-        //                     <div className="p-5">
-        //                         <p>
-        //                             Email cannot be verified because {parsedWebsite}{" "}
-        //                             servers accept all emails
-        //                         </p>
-        //                         <div className="border mt-5 "></div>
-        //                         <p className="text-slate-500 text-sm mt-3">
-        //                             Currently implementing feature to suggest an
-        //                             email based on company size
-        //                         </p>
-        //                     </div>
-        //                 </Card>
-        //             );
-        //         case "not exist":
-        //             return (
-        //                 <Card>
-        //                     <div className="p-5">
-        //                         <p>Can't find email for this employee</p>
-        //                     </div>
-        //                 </Card>
-        //             );
-        //         case "no domain":
-        //             return (
-        //                 <ErrorCard>
-        //                     <div className="p-3 items-center flex flex-row dark:bg-red-900 dark:text-red-50">
-        //                         <AlertCircle
-        //                             strokeWidth="1"
-        //                             color="red"
-        //                             size={17}
-        //                         />
-        //                         <p className="px-3 py-1">
-        //                             Domain does not exist, check spelling or try
-        //                             another website
-        //                         </p>
-        //                     </div>
-        //                 </ErrorCard>
-        //             );
-        //         default:
-        //             return (
-        //                 <Card>
-        //                     <div className="p-5">
-        //                         <p>Email verified!</p>
-        //                         {verificationResponse}
-        //                     </div>
-        //                 </Card>
-        //             );
-        //     }
     };
     return (
         <div className="h-screen flex justify-center pt-4 bg-[#F7F9FA] dark:bg-zinc-900 ">
             <div className="md:max-w-xl w-full m-4">
-                <HelpCircle
-                    strokeWidth="1"
-                    size={17}
-                    onClick={() =>
-                        setIsPopupVisible(
-                            (prevIsPopupVisible) => !prevIsPopupVisible
-                        )
-                    }
-                />
-                {isPopupVisible && (
-                    <Help onClose={() => setIsPopupVisible(false)} />
-                )}
-
+                <Popover>
+                    <PopoverTrigger>
+                        <HelpCircle strokeWidth="1" size={17} />
+                    </PopoverTrigger>
+                    <PopoverContent>
+                        Enter an <em>employee name</em> and their company{" "}
+                        <em>website</em> and Email Finder will attempt to create
+                        and verify their email address
+                    </PopoverContent>
+                </Popover>
                 <SearchBar setEmailResponse={setEmailResponse} />
                 {verificationResponse &&
                     getResponseMessage(verificationResponse)}
