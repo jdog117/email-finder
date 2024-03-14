@@ -15,10 +15,9 @@ interface Response {
 
 interface SearchBarProps {
     setEmailResponse: (data: Response) => void;
-    setWebsiteResponse: (data: string) => void;
 }
 
-function SearchBar({ setEmailResponse, setWebsiteResponse }: SearchBarProps) {
+function SearchBar({ setEmailResponse }: SearchBarProps) {
     const [website, setWebsite] = useState("");
     const [employeeName, setEmployeeName] = useState("");
 
@@ -46,7 +45,6 @@ function SearchBar({ setEmailResponse, setWebsiteResponse }: SearchBarProps) {
             );
             const data = await response.json();
             setEmailResponse(data);
-            setWebsiteResponse(website.split(".")[0]);
         }
     };
 

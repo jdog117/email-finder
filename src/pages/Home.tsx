@@ -20,7 +20,6 @@ function Home() {
     const [verificationResponse, setEmailResponse] = useState<Response | null>(
         null
     );
-    const [parsedWebsite, setWebsiteResponse] = useState("");
     const [isPopupVisible, setIsPopupVisible] = useState(false);
 
     const getResponseMessage = (response: Response) => {
@@ -118,10 +117,7 @@ function Home() {
                         <Help onClose={() => setIsPopupVisible(false)} />
                     )}
                 </div>
-                <SearchBar
-                    setEmailResponse={setEmailResponse}
-                    setWebsiteResponse={setWebsiteResponse}
-                />
+                <SearchBar setEmailResponse={setEmailResponse} />
                 {verificationResponse &&
                     getResponseMessage(verificationResponse)}
             </div>
