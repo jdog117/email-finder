@@ -1,5 +1,4 @@
 import SearchBar from "@/components/SearchBar";
-import { Card } from "@/components/ui/card";
 import { useState } from "react";
 import { ErrorCard } from "@/components/ui/errorCard";
 import { AlertCircle, HelpCircle } from "lucide-react";
@@ -14,6 +13,7 @@ function Home() {
             email: string;
             acceptsAll: boolean;
             body: string;
+            fullName: string;
         };
     }
 
@@ -26,12 +26,12 @@ function Home() {
     const getResponseMessage = (response: Response) => {
         if (response.error) {
             return (
-                <Lead
-                    message={response.message.body}
-                    email={response.message.email}
-                    name={"name"}
-                    acceptsAll={response.message.acceptsAll}
-                />
+                <ErrorCard>
+                    <div className="p-3 items-center flex flex-row dark:bg-red-900 dark:text-red-50">
+                        <AlertCircle strokeWidth="1" color="red" size={17} />
+                        <p className="px-3 py-1">{response.message.body}</p>
+                    </div>
+                </ErrorCard>
             );
         } else if (response.success) {
             //       "mx_records": true,
@@ -42,7 +42,7 @@ function Home() {
                 <Lead
                     message={response.message.body}
                     email={response.message.email}
-                    name={"name"}
+                    name={response.message.fullName}
                     acceptsAll={response.message.acceptsAll}
                 />
             );

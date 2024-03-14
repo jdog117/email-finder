@@ -6,10 +6,8 @@ const lookup = promisify(dns.lookup);
 const resolveMx = promisify(dns.resolveMx);
 export async function verifyEmail(website, personName) {
     //const email = `${personName.split(' ').join('.').replace(/\s/g, "")}@${website}`; //first.last@website.com
-
     let verifyResponse = {};
     const emailFirstName = `${personName.split(" ")[0]}@${website}`; // first@website.com
-    console.log(emailFirstName);
 
     // Domain check
     try {
@@ -22,6 +20,7 @@ export async function verifyEmail(website, personName) {
                 email: "",
                 acceptsAll: false,
                 body: "Domain does not exist, check spelling or try another website",
+                fullName: "",
             },
         };
         return verifyResponse;
@@ -43,6 +42,7 @@ export async function verifyEmail(website, personName) {
                     email: "",
                     acceptsAll: false,
                     body: "Can't verify email address. Connection to server timed out.",
+                    fullName: "",
                 },
             };
             resolve(verifyResponse);
@@ -73,6 +73,7 @@ export async function verifyEmail(website, personName) {
                         email: emailFirstName,
                         acceptsAll: true,
                         body: "",
+                        fullName: personName,
                     },
                 };
                 resolve(verifyResponse); // accepts all
@@ -92,6 +93,7 @@ export async function verifyEmail(website, personName) {
                         email: emailFirstName,
                         acceptsAll: false,
                         body: "",
+                        fullName: personName,
                     },
                 };
                 resolve(verifyResponse); // email exists
@@ -101,7 +103,10 @@ export async function verifyEmail(website, personName) {
                     error: false,
                     success: true,
                     message: {
-                        emailExists: false,
+                        email: "",
+                        acceptsAll: false,
+                        body: "Email doesn't exist",
+                        fullName: personName,
                     },
                 };
                 resolve(verifyResponse);
@@ -117,6 +122,7 @@ export async function verifyEmail(website, personName) {
                     email: "",
                     acceptsAll: false,
                     body: error.message,
+                    fullName: "",
                 },
             };
             resolve(verifyResponse);

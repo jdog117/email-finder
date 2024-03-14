@@ -9,6 +9,7 @@ interface Response {
         email: string;
         acceptsAll: boolean;
         body: string;
+        fullNam: string;
     };
 }
 
@@ -43,9 +44,7 @@ function SearchBar({ setEmailResponse, setWebsiteResponse }: SearchBarProps) {
             const response = await fetch(
                 `/verifyEmail?website=${website}&personName=${employeeName}`
             );
-            const data = await response.json(); // IF SHIT HITS THE FAN CHECK HERE
-            console.log("search");
-            console.log(data);
+            const data = await response.json();
             setEmailResponse(data);
             setWebsiteResponse(website.split(".")[0]);
         }
