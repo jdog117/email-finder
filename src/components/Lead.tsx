@@ -18,27 +18,28 @@ export default function Lead({ message, email, name, acceptsAll }: LeadProps) {
 
     return (
         //change two columns
-        <Card className="w-full flex-initial w-120">
-            <div className="flex flex-row w-full items-center p-5">
-                <div className="w-25 pr-5">
-                    <Avatar>
-                        <AvatarFallback className="text-3xl">
-                            {initials}
-                        </AvatarFallback>
-                    </Avatar>
-                </div>
+        <Card className="w-full">
+            <div className="flex flex-row items-center p-5">
+                <Avatar className="mr-5">
+                    <AvatarFallback className="text-3xl">
+                        {initials}
+                    </AvatarFallback>
+                </Avatar>
+
                 <div className="w-full">
-                    <h1 className="font-bold">{name}</h1>
+                    <h1 className="font-semibold">{name}</h1>
                     <p>{message}</p>
-                    <div className="flex flex-row items-center">
-                        <p className="w-full">{email}</p>
+                    <div className="flex flex-row justify-start items-center">
+                        <p className="">{email}</p>
                         <CheckCircle2
-                            className="w-1/4 mt-1"
+                            className="mt-1 ml-2"
                             color="green"
                             size={15}
                         />
                     </div>
-                    {acceptsAll && <p>Accepts all broski</p>}
+                    {acceptsAll && (
+                        <p className="font-thin">Accepts all broski</p>
+                    )}
                 </div>
             </div>
         </Card>

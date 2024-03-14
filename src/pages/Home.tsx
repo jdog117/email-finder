@@ -100,23 +100,21 @@ function Home() {
         //     }
     };
     return (
-        <div className="flex bg-[#F7F9FA] dark:bg-zinc-900 h-screen flex-col items-center w-full pt-8">
-            <div className="w-3/6">
-                <div className="relative">
-                    <HelpCircle
-                        className="relative"
-                        strokeWidth="1"
-                        size={17}
-                        onClick={() =>
-                            setIsPopupVisible(
-                                (prevIsPopupVisible) => !prevIsPopupVisible
-                            )
-                        }
-                    />
-                    {isPopupVisible && (
-                        <Help onClose={() => setIsPopupVisible(false)} />
-                    )}
-                </div>
+        <div className="h-screen flex justify-center pt-4 bg-[#F7F9FA] dark:bg-zinc-900 ">
+            <div className="md:max-w-xl w-full m-4">
+                <HelpCircle
+                    strokeWidth="1"
+                    size={17}
+                    onClick={() =>
+                        setIsPopupVisible(
+                            (prevIsPopupVisible) => !prevIsPopupVisible
+                        )
+                    }
+                />
+                {isPopupVisible && (
+                    <Help onClose={() => setIsPopupVisible(false)} />
+                )}
+
                 <SearchBar setEmailResponse={setEmailResponse} />
                 {verificationResponse &&
                     getResponseMessage(verificationResponse)}
