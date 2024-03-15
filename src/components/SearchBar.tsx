@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-//import verifyEmail from "@/lib/verifyEmail";
+import { Search } from "lucide-react";
 
 interface Response {
     error: boolean;
@@ -68,8 +68,14 @@ function SearchBar({ setEmailResponse }: SearchBarProps) {
                 placeholder="company.com"
                 type="text"
             ></input>
-            <Button type="submit" className="py-8 px-6 ml-3 ">
-                Find
+            <Button
+                type="submit"
+                className="py-8 px-3 ml-3 flex items-center justify-center md:px-6"
+            >
+                <span className="md:hidden">
+                    <Search className="p-0 m-0" size={20} />
+                </span>
+                <span className="hidden md:inline">Find</span>
             </Button>
         </form>
     );
