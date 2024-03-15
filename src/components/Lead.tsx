@@ -12,6 +12,11 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
+import {
+    HoverCard,
+    HoverCardContent,
+    HoverCardTrigger,
+} from "@/components/ui/hover-card";
 
 interface LeadProps {
     message: string;
@@ -85,7 +90,19 @@ export default function Lead({ message, email, name, acceptsAll }: LeadProps) {
                         </div>
                     </div>
                     {acceptsAll && (
-                        <p className="font-thin">Email is accept all</p>
+                        <div className="flex items-center">
+                            <p className="font-thin">Email is&nbsp;</p>
+                            <HoverCard>
+                                <HoverCardTrigger className="font-thin underline decoration-1">
+                                    accept all
+                                </HoverCardTrigger>
+                                <HoverCardContent>
+                                    This domain will report any email under the
+                                    domain as valid. So we cannot verify if the
+                                    email exists.
+                                </HoverCardContent>
+                            </HoverCard>
+                        </div>
                     )}
                 </div>
             </div>
