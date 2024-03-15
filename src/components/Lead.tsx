@@ -17,6 +17,7 @@ import {
     HoverCardContent,
     HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import { Button } from "./ui/button";
 
 interface LeadProps {
     message: string;
@@ -105,6 +106,18 @@ export default function Lead({ message, email, name, acceptsAll }: LeadProps) {
                         </div>
                     )}
                 </div>
+                {email && (
+                    <HoverCard>
+                        <HoverCardTrigger>
+                            <Button className="text-xs h-8">
+                                Save as lead
+                            </Button>
+                        </HoverCardTrigger>
+                        <HoverCardContent className="w-auto">
+                            <p>Coming soon</p>
+                        </HoverCardContent>
+                    </HoverCard>
+                )}
             </div>
         </Card>
     );

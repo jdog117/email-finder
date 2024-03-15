@@ -47,7 +47,7 @@ function Home() {
         }
     };
     return (
-        <div className="h-screen flex justify-center pt-4 bg-[#F7F9FA] dark:bg-zinc-900 ">
+        <div className="h-screen flex justify-center md:pt-4 bg-[#F7F9FA] dark:bg-zinc-900 ">
             <div className="md:max-w-xl w-full m-4">
                 <Popover>
                     <PopoverTrigger>
