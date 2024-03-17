@@ -1,6 +1,6 @@
-import express from "express";
-import cors from "cors";
-import { verifyEmail } from "./src/lib/verifyEmail.js";
+const express = require("express");
+const cors = require("cors");
+const verifyEmail = require("./verifyEmail.js").verifyEmail;
 
 const app = express();
 
@@ -22,6 +22,3 @@ app.get("/verifyEmail", async (req, res) => {
 app.listen(3001, () => {
     console.log("Server is running on port 3001");
 });
-
-// node server.js TO RUN
-// http://localhost:3001/verifyEmail?website=example.com&personName=john.doe

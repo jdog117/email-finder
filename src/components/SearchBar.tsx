@@ -40,8 +40,9 @@ function SearchBar({ setEmailResponse }: SearchBarProps) {
             return;
         } else {
             event.preventDefault();
+            // `/verifyEmail?website=${website}&personName=${employeeName}`
             const response = await fetch(
-                `/verifyEmail?website=${website}&personName=${employeeName}`
+                `http://146.190.54.166:3001/verifyEmail?website=${website}&personName=${employeeName}`
             );
             const data = await response.json();
             setEmailResponse(data);

@@ -1,10 +1,10 @@
-import * as dns from "dns";
-import * as net from "net";
-import { promisify } from "util";
+const dns = require("dns");
+const net = require("net");
+const { promisify } = require("util");
 
 const lookup = promisify(dns.lookup);
 const resolveMx = promisify(dns.resolveMx);
-export async function verifyEmail(website, personName) {
+async function verifyEmail(website, personName) {
     //const email = `${personName.split(' ').join('.').replace(/\s/g, "")}@${website}`; //first.last@website.com
     let verifyResponse = {};
     const emailFirstName = `${personName.split(" ")[0]}@${website}`; // first@website.com
@@ -130,40 +130,4 @@ export async function verifyEmail(website, personName) {
     });
 }
 
-/* Function doesnt work right now because linkedin wont return a body, probably detects this as programatic access */
-// export async function getCompanySize(companyName, apiKey, searchEngineId) {
-//     const apiUrl = `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${searchEngineId}&q=${companyName}`;
-
-//     // Fetch the search results
-//     const response = await fetch(apiUrl);
-//     if (!response.ok) {
-//         throw new Error("Failed to fetch search results");
-//     }
-//     const data = await response.json();
-
-//     // Extract the LinkedIn URL from the search results
-//     // Note: You'll need to adjust this part based on the structure of the search results
-//     const linkedInUrl = data.items[0].link;
-//     console.log(linkedInUrl);
-
-//     // my search engine is set to only show *.linkedin.com/company/* results
-//     // Fetch the LinkedIn profile
-//     console.log(linkedInUrl);
-//     const profileResponse = await fetch(linkedInUrl);
-//     if (!profileResponse.ok) {
-//         throw new Error("Failed to fetch LinkedIn profile");
-//     }
-//     const html = await profileResponse.text();
-//     console.log(" pro resp: ", profileResponse);
-
-//     // Extract the company size from the HTML
-//     const regex =
-//         /<span class="org-top-card-summary-info-list__info-item-text">([\d,]+)\s+employees<\/span>/;
-//     const match = html.match(regex);
-//     if (!match) {
-//         throw new Error("Failed to extract company size");
-//     }
-//     const companySize = match[1].replace(",", "");
-
-//     return parseInt(companySize);
-// }
+module.exports.verifyEmail = verifyEmail;
