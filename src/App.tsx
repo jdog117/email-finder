@@ -4,6 +4,7 @@ import Home from "@/pages/Home";
 import NavBar from "./components/NavBar";
 import NotFound from "./pages/NotFound";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Analytics } from "@vercel/analytics/react";
 import About from "./pages/About";
 
 export function App() {
@@ -15,6 +16,7 @@ export function App() {
                 <Route path="*" element={<NotFound />} />
                 <Route path="/about" element={<About />} />
             </Routes>
+            <Analytics />
         </ThemeProvider>
     );
 }
