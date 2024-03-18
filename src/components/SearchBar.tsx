@@ -41,7 +41,7 @@ function SearchBar({ setEmailResponse }: SearchBarProps) {
         } else {
             event.preventDefault();
             const response = await fetch(
-                `http://154.12.230.53:3001/verifyEmail?website=${website}&personName=${employeeName}`
+                `https://ninamori.us/verifyEmail?website=${website}&personName=${employeeName}`
             );
             const data = await response.json();
             setEmailResponse(data);
