@@ -1,0 +1,38 @@
+
+/* Function doesnt work right now because linkedin wont return a body, probably detects this as programatic access */
+// export async function getCompanySize(companyName, apiKey, searchEngineId) {
+//     const apiUrl = `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${searchEngineId}&q=${companyName}`;
+
+//     // Fetch the search results
+//     const response = await fetch(apiUrl);
+//     if (!response.ok) {
+//         throw new Error("Failed to fetch search results");
+//     }
+//     const data = await response.json();
+
+//     // Extract the LinkedIn URL from the search results
+//     // Note: You'll need to adjust this part based on the structure of the search results
+//     const linkedInUrl = data.items[0].link;
+//     console.log(linkedInUrl);
+
+//     // my search engine is set to only show *.linkedin.com/company/* results
+//     // Fetch the LinkedIn profile
+//     console.log(linkedInUrl);
+//     const profileResponse = await fetch(linkedInUrl);
+//     if (!profileResponse.ok) {
+//         throw new Error("Failed to fetch LinkedIn profile");
+//     }
+//     const html = await profileResponse.text();
+//     console.log(" pro resp: ", profileResponse);
+
+//     // Extract the company size from the HTML
+//     const regex =
+//         /<span class="org-top-card-summary-info-list__info-item-text">([\d,]+)\s+employees<\/span>/;
+//     const match = html.match(regex);
+//     if (!match) {
+//         throw new Error("Failed to extract company size");
+//     }
+//     const companySize = match[1].replace(",", "");
+
+//     return parseInt(companySize);
+// }

@@ -6,7 +6,7 @@ function NavBar() {
         <nav className="bg-background">
             <div className="flex justify-between items-center">
                 <Link to="/">
-                    <h2 className="text-2xl font-bold m-4 font-mono">
+                    <h2 className="text-2xl font-bold md:m-4 m-2 font-mono">
                         EMAIL FINDER
                     </h2>
                 </Link>
@@ -14,7 +14,7 @@ function NavBar() {
                     <Link to="/about">
                         <h3 className="font-mono">ABOUT</h3>
                     </Link>
-                    <div className="m-4">
+                    <div className="md:m-4 m-2">
                         <ModeToggle />
                     </div>
                 </div>

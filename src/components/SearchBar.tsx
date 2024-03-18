@@ -1,13 +1,23 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-//import verifyEmail from "@/lib/verifyEmail";
+import { Search } from "lucide-react";
 
-interface SearchBarProps {
-    setEmailResponse: (data: string) => void;
-    setWebsiteResponse: (data: string) => void;
+interface Response {
+    error: boolean;
+    success: boolean;
+    message: {
+        email: string;
+        acceptsAll: boolean;
+        body: string;
+        fullName: string;
+    };
 }
 
-function SearchBar({ setEmailResponse, setWebsiteResponse }: SearchBarProps) {
+interface SearchBarProps {
+    setEmailResponse: (data: Response) => void;
+}
+
+function SearchBar({ setEmailResponse }: SearchBarProps) {
     const [website, setWebsite] = useState("");
     const [employeeName, setEmployeeName] = useState("");
 
@@ -31,11 +41,10 @@ function SearchBar({ setEmailResponse, setWebsiteResponse }: SearchBarProps) {
         } else {
             event.preventDefault();
             const response = await fetch(
-                `/verifyEmail?website=${website}&personName=${employeeName}`
+                `https://ninamori.us/verifyEmail?website=${website}&personName=${employeeName}`
             );
-            const data = await response.text();
+            const data = await response.json();
             setEmailResponse(data);
-            setWebsiteResponse(website.split(".")[0]);
         }
     };
 
@@ -45,22 +54,28 @@ function SearchBar({ setEmailResponse, setWebsiteResponse }: SearchBarProps) {
             <input
                 value={employeeName}
                 onChange={handleEmployeeNameChange}
-                className="flex-auto h-10 border border-input bg-background rounded-l-sm px-3 py-8 text-sm  file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none  disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex w-1/2 min-w-32 h-10 border border-input bg-background rounded-l-sm px-3 py-8 text-sm placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed"
                 placeholder="employee name"
                 type="text"
             ></input>
-            <div className="flex h-10 font-thin text-lg items-center justify-center border border-input bg-background px-4 py-8 ring-offset-background disabled:cursor-not-allowed disabled:opacity-50">
+            <div className="flex h-10 font-thin text-lg items-center justify-center border border-input bg-background px-4 py-8 disabled:cursor-not-allowed">
                 @
             </div>
             <input
                 value={website}
                 onChange={handleWebsiteChange}
-                className="flex-auto h-10 border border-input bg-background rounded-r-sm px-3 py-8 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none  disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex w-1/2 min-w-32 h-10 border border-input bg-background rounded-r-sm px-3 py-8 text-sm placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed"
                 placeholder="company.com"
                 type="text"
             ></input>
-            <Button type="submit" className="py-8 px-6 ml-3 ">
-                Find
+            <Button
+                type="submit"
+                className="py-8 px-3 ml-3 flex items-center justify-center md:px-6"
+            >
+                <span className="md:hidden">
+                    <Search className="p-0 m-0" size={20} />
+                </span>
+                <span className="hidden md:inline">Find</span>
             </Button>
         </form>
     );

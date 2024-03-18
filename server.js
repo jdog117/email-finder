@@ -1,6 +1,8 @@
-import express from "express";
-import cors from "cors";
-import { verifyEmail } from "./src/lib/verifyEmail.js";
+const express = require("express");
+const cors = require("cors");
+const verifyEmail = require("./verifyEmail.js").verifyEmail;
+const https = require("https");
+const fs = require("fs");
 
 const app = express();
 
@@ -12,15 +14,26 @@ app.get("/verifyEmail", async (req, res) => {
 
     try {
         const verifiedEmail = await verifyEmail(website, personName);
-        res.status(200).send(verifiedEmail);
+        console.log(verifiedEmail);
+        res.status(200).json(verifiedEmail);
     } catch (error) {
-        res.status(400).send(error.message);
+        res.status(400).json(error.message);
     }
 });
 
-app.listen(3001, () => {
-    console.log("Server is running on port 3001");
-});
-
-// node server.js TO RUN
-// http://localhost:3001/verifyEmail?website=example.com&personName=john.doe
+// HTTPS server
+https
+    .createServer(
+        {
+            key: fs.readFileSync(
+                "/etc/letsencrypt/live/ninamori.us/privkey.pem"
+            ),
+            cert: fs.readFileSync(
+                "/etc/letsencrypt/live/ninamori.us/fullchain.pem"
+            ),
+        },
+        app
+    )
+    .listen(443, () => {
+        console.log("HTTPS Server is running on port 443");
+    });

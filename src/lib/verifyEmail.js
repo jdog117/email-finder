@@ -1,32 +1,51 @@
-import * as dns from "dns";
-import * as net from "net";
-import { promisify } from "util";
+const dns = require("dns");
+const net = require("net");
+const { promisify } = require("util");
 
 const lookup = promisify(dns.lookup);
 const resolveMx = promisify(dns.resolveMx);
-export async function verifyEmail(website, personName) {
+async function verifyEmail(website, personName) {
     //const email = `${personName.split(' ').join('.').replace(/\s/g, "")}@${website}`; //first.last@website.com
-
+    let verifyResponse = {};
     const emailFirstName = `${personName.split(" ")[0]}@${website}`; // first@website.com
-    console.log(emailFirstName);
 
     // Domain check
     try {
         await lookup(website);
     } catch (error) {
-        throw new Error("no domain");
+        verifyResponse = {
+            error: true,
+            success: false,
+            message: {
+                email: "",
+                acceptsAll: false,
+                body: "Domain does not exist, check spelling or try another website",
+                fullName: "",
+            },
+        };
+        return verifyResponse;
     }
 
     // SMTP check
     const mxRecords = await resolveMx(website);
     const socket = net.createConnection(25, mxRecords[0].exchange);
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         const timeout = 1000 * 10; // 10 seconds
         socket.setEncoding("ascii");
         socket.setTimeout(timeout, () => {
             socket.end();
-            reject(new Error("Connection timeout"));
+            verifyResponse = {
+                error: true,
+                success: false,
+                message: {
+                    email: "",
+                    acceptsAll: false,
+                    body: "Can't verify email address. Connection to server timed out.",
+                    fullName: "",
+                },
+            };
+            resolve(verifyResponse);
         });
 
         let step = 0;
@@ -47,7 +66,17 @@ export async function verifyEmail(website, personName) {
                 step === 3
             ) {
                 socket.end();
-                resolve("accepts all");
+                verifyResponse = {
+                    error: false,
+                    success: true,
+                    message: {
+                        email: emailFirstName,
+                        acceptsAll: true,
+                        body: "",
+                        fullName: personName,
+                    },
+                };
+                resolve(verifyResponse); // accepts all
             } else if (step === 3) {
                 // Server does not accept all emails, proceed with normal verification
                 socket.write(`RCPT TO:<${emailFirstName}>\r\n`);
@@ -57,87 +86,48 @@ export async function verifyEmail(website, personName) {
                 step === 4
             ) {
                 socket.end();
-                resolve(emailFirstName); // email exists
+                verifyResponse = {
+                    error: false,
+                    success: true,
+                    message: {
+                        email: emailFirstName,
+                        acceptsAll: false,
+                        body: "",
+                        fullName: personName,
+                    },
+                };
+                resolve(verifyResponse); // email exists
             } else {
                 socket.end();
-                reject(new Error("not exist"));
+                verifyResponse = {
+                    error: false,
+                    success: true,
+                    message: {
+                        email: "",
+                        acceptsAll: false,
+                        body: "Can't verify an email for this person",
+                        fullName: personName,
+                    },
+                };
+                resolve(verifyResponse);
             }
         });
 
         socket.on("error", (error) => {
             socket.end();
-            reject(error);
+            verifyResponse = {
+                error: true,
+                success: false,
+                message: {
+                    email: "",
+                    acceptsAll: false,
+                    body: error.message,
+                    fullName: "",
+                },
+            };
+            resolve(verifyResponse);
         });
     });
 }
 
-// for testing
-// verifyEmail("", "")
-//     .then((email) => console.log("Email exists:", email))
-//     .catch((error) => console.error("Error:", error.message));
-
-// Example response from hunter.io
-// https://api.hunter.io/v2/email-verifier?email=piron@theepochtimes.com&api_key=*******
-
-// {
-//     "data": {
-//       "status": "accept_all",
-//       "result": "risky",
-//       "_deprecation_notice": "Using result is deprecated, use status instead",
-//       "score": 73,
-//       "email": "piron@theepochtimes.com",
-//       "regexp": true,
-//       "gibberish": false,
-//       "disposable": false,
-//       "webmail": false,
-//       "mx_records": true,
-//       "smtp_server": true,
-//       "smtp_check": true,
-//       "accept_all": true,
-//       "block": false,
-//       "sources": []
-//     },
-//     "meta": {
-//       "params": {
-//         "email": "piron@theepochtimes.com"
-//       }
-//     }
-//   }
-
-/* Function doesnt work right now because linkedin wont return a body, probably detects this as programatic access */
-// export async function getCompanySize(companyName, apiKey, searchEngineId) {
-//     const apiUrl = `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${searchEngineId}&q=${companyName}`;
-
-//     // Fetch the search results
-//     const response = await fetch(apiUrl);
-//     if (!response.ok) {
-//         throw new Error("Failed to fetch search results");
-//     }
-//     const data = await response.json();
-
-//     // Extract the LinkedIn URL from the search results
-//     // Note: You'll need to adjust this part based on the structure of the search results
-//     const linkedInUrl = data.items[0].link;
-//     console.log(linkedInUrl);
-
-//     // my search engine is set to only show *.linkedin.com/company/* results
-//     // Fetch the LinkedIn profile
-//     console.log(linkedInUrl);
-//     const profileResponse = await fetch(linkedInUrl);
-//     if (!profileResponse.ok) {
-//         throw new Error("Failed to fetch LinkedIn profile");
-//     }
-//     const html = await profileResponse.text();
-//     console.log(" pro resp: ", profileResponse);
-
-//     // Extract the company size from the HTML
-//     const regex =
-//         /<span class="org-top-card-summary-info-list__info-item-text">([\d,]+)\s+employees<\/span>/;
-//     const match = html.match(regex);
-//     if (!match) {
-//         throw new Error("Failed to extract company size");
-//     }
-//     const companySize = match[1].replace(",", "");
-
-//     return parseInt(companySize);
-// }
+module.exports.verifyEmail = verifyEmail;
