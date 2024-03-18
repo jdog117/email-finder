@@ -4,20 +4,21 @@ function About() {
             <div className="max-w-lg">
                 <h1 className="text-4xl font-bold font-mono mb-4">About</h1>
                 <p className="text-sm font-mono">
-                    I created this site to aid me with my job search. Often, if
-                    I need to contact a recruiter and employee at a company I'm
-                    looking to apply to, it's hard to get their info or even
-                    messaging on LinkedIn. I also use cold emailing and thus
-                    another reason I may need a person's email address.
+                    I created this site to aid me on my job search. Often, if I
+                    need to contact a recruiter or employee at a company I'm
+                    looking to apply to, it's hard to get their contact info or
+                    even get ahold of them on LinkedIn. I also use cold emailing
+                    and thus another reason I may need a person's email address.
                 </p>
                 <p className="my-3 text-sm font-mono">
                     There are a few sites out there that help you find an email
                     such as Hunter.io, what this project is based on, however
                     they only give a limited number of searches before you have
-                    to pull out your credit card. I thought to myself, "they are
-                    probably just pinging the company's domain to check if their
-                    guessed email exists, I could probably right an app to do
-                    that for me for free." And so birthed this project!
+                    to pull out the 'ol credit card. So as I often do, I started
+                    thinking about how I could make this myself and I thought,
+                    "they are probably just pinging the company's domain to
+                    check if an email exists, I could probably write an app to
+                    do that for me!" And so birthed this project.
                 </p>
                 <p className="text-sm font-mono">
                     This project is open source and can be found on my GitHub{" "}

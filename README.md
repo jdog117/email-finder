@@ -1,58 +1,53 @@
 # Email Finder
 
-Email Finder uses an employee name and company to find that employee's email address. \
-Using email format patterns based on a companie's size it guesses multiple emails and verifies them by hitting their mail servers. \
-This allows you to check if the guessed email address exists without having to send a blind one out.
-Check out the documention for the email verification process [here](docs/email-verification-doc.md).
+[Email Finder](https://email-finder-jc.vercel.app) uses an employee name and company website to create and verify their email address. \
+It allows you to check if an email address exists for any employee without having to send a blind email out. Helpful for reaching out to recruiters or employees when applying for jobs. \
+Check out the documention [here](docs/email-verification-doc.md) to see how my verficiation server works.
 
-## Project Motivation
+# Project Motivation
 
-I created this site to aid me with my job search. Often, if I need to contact a recruiter and employee at a company I'm looking to apply to, it's hard to get their info or even messaging on LinkedIn. I also use cold emailing and thus another reason I may need a person's email address.
+I created this site to aid me on my job search. Often, if I need to contact a recruiter or employee at a company I'm looking to apply to, it's hard to get their contact info or even get ahold of them on LinkedIn. I also use cold emailing and thus another reason I may need a person's email address.
 
-There are a few sites out there that help you find an email such as Hunter.io, what this project is based on, however they only give a limited number of searches before you have to pull out your credit card. \
-I thought to myself, "they are probably just pinging the company's domain to check if their guessed email exists, I could probably right an app to do that for me for free." And so birthed this project!
+There are a few sites out there that help you find an email such as Hunter.io, what this project is based on, however they only give a limited number of searches before you have to pull out the 'ol credit card :( \
+So as I often do, I started thinking about how I could make this myself and I thought, "they are probably just pinging the company's domain to check if an email exists, I could probably write an app to do that for me!" And so birthed this project.
 
-# React + TypeScript + Vite + Vercel
+While simple in concept and easy to get the individual parts working, getting them all to work together in production on the cloud was a great challenge. Read below to learn more about some that wild journey.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Features
 
-Currently, two official plugins are available:
+-   Responsive design
+-   Dynamic React elements
+-   Custom secure server
+-   Color themes
 
--   [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
--   [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Technologies
 
-## Expanding the ESLint configuration
+### React + TypeScript + Vite + Vercel
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
--   Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-    // other rules...
-    parserOptions: {
-        ecmaVersion: "latest",
-        sourceType: "module",
-        project: ["./tsconfig.json", "./tsconfig.node.json"],
-        tsconfigRootDir: __dirname,
-    },
-};
-```
-
--   Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
--   Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
--   Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+-   Tailwind CSS
+-   Eslint + Preiiter
+-   Express js
 
 ## Hosting
 
-This site is hosted on Vercel and has an express server connected to a Vercel serverless function for email verification
+Website is hosted on Vercel and email verification server on a VPS.
 
-# Feature Requests
+## What I Learned
 
--   Offer suggestion email based on company size
+-   how to use Tailwind CSS in a powerful way
+-   serverless functions, VPS, self hosting, https/http protocols
+-   testing with Vite and React
+-   Responsive design with Tailwind
 
-# Dev
+## Feature Requests
 
-> npm run dev \
-> http://localhost:5173/ \
-> node server.js
+-   Use email format patterns based on a companie's size to suggest multiple emails
+-   Account creation and lead saving
+
+## Dev
+
+> $ vercel dev
+
+# Development Hell
+
+Ok it wasn't _hell_ but the amount of iterations and late nights I had to go through was pretty gruling.
