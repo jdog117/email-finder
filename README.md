@@ -57,11 +57,9 @@ Turns out, none of the major hosting services such as AWS, Azure, and even Digit
 
 I decided that if no one else will do it, I'll just create my own server. So I spent the greater part of that night setting up this behemoth of a server:
 
-<div style="display: flex; justify-content: center;">
-    <img src="docs/img/piZero.jpg" width="500">
-</div>
-
-&nbsp;
+<p align="center">
+  <img src="docs/img/piZero.jpg" width="500">
+</p>
 
 Yes, a Raspberry Pi Zero, smaller than my index finger. I thought it would be sweet to have this little guy be the computer running my server in the background. It doesn't need to handle much compute anyway. I used an Express server and forwarded a port on my router _(another timely procedure when you've lost the admin password)._
 
@@ -75,18 +73,14 @@ So I was stuck again and this one wasn't going to be an easy fix. The solution c
 Just before I pulled out my wallet again, I discovered Let's Encrypt, which is a free open certificate authority. To get a certificate, you need a domain, not an IP address which is all a VPS has off the bat. Fortunately, I had an old unused domain which I used to create an A record in the DNS settings which points to my VPS. \
 Now I could create the cirtificate and run my server securly.
 
-<div style="display: flex; justify-content: center;">
+<p align="center">
     <img src="docs/img/ssl-certificate.png" width="500">
-</div>
-
-&nbsp;
+</p>
 
 I edited the IP tables to close the ports I previously used, 3001 and 80 (HTTP), and opened port 443 for HTTPS. To my astonishment Email Finder was working perfectly in production and my struggles were finally over.
 
-<div style="display: flex; justify-content: center;">
+<p align="center">
     <img src="docs/img/email-finder-example.png" width="500">
-</div>
-
-&nbsp;
+</p>
 
 What did I learn? Well, that I completely underestimated the backend for this site and that I could have profited greatly from an extra hour or two of research before starting that escapade ;)
