@@ -9,9 +9,9 @@ Check out the documentation [here](docs/email-verification-doc.md) to see how my
 
 # Motivation
 
-I created this site to aid me in my job search. Often, when I need to contact a recruiter or an employee at a company I'm looking to apply to, it's hard to get their contact info or even reach them on LinkedIn.
+I created this site to aid me on my job search. Often, when I need to contact a recruiter or an employee at a company I'm looking to apply to, it's difficult to get their contact info or even reach them on LinkedIn.
 
-There are a few sites out there that help you find an email, such as Hunter.io, which this project is based on. However, they only give a limited number of searches before you have to pull out the 'ol credit card :( \
+There are a few sites out there that help find an email, such as Hunter.io, which this project is based on. However, they only give a limited number of searches before you have to pull out the 'ol credit card :( \
 So, as I often do, I started thinking about how I could make this myself. I thought, "They are probably just pinging the company's domain to check if an email exists. I could probably write an app to do that for me!" And so, this project was born.
 
 While simple in concept and easy to get the individual parts working, getting them all to work together in production on the cloud was a great challenge. \

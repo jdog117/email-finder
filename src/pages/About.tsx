@@ -4,10 +4,10 @@ function About() {
             <div className="max-w-lg">
                 <h1 className="text-4xl font-bold font-mono mb-4">About</h1>
                 <p className="text-sm font-mono">
-                    I created this site to aid me in my job search. Often, when
+                    I created this site to aid me on my job search. Often, when
                     I need to contact a recruiter or an employee at a company
-                    I'm looking to apply to, it's hard to get their contact info
-                    or even reach them on LinkedIn.
+                    I'm looking to apply to, it's difficult to get their contact
+                    info or even reach them on LinkedIn.
                 </p>
                 <p className="my-3 text-sm font-mono">
                     There are a few sites out there that help you find an email

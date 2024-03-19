@@ -55,8 +55,8 @@ function Home() {
                     </PopoverTrigger>
                     <PopoverContent>
                         Enter an <em>employee name</em> and their company{" "}
-                        <em>website</em> and Email Finder will attempt to create
-                        and verify their email address
+                        <em>website</em> to generate and verify an email address
+                        for this person
                     </PopoverContent>
                 </Popover>
                 <SearchBar setEmailResponse={setEmailResponse} />
