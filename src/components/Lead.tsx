@@ -27,6 +27,7 @@ interface LeadProps {
 }
 
 export default function Lead({ message, email, name, acceptsAll }: LeadProps) {
+    email = email.toLowerCase();
     const initials = name
         .split(" ")
         .map((part) => part[0])
