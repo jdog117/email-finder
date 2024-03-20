@@ -39,18 +39,18 @@ export default function Lead({ message, email, name, acceptsAll }: LeadProps) {
     );
     return (
         //change two columns
-        <Card className="w-full bg-card">
-            <div className="flex flex-row items-center p-5">
-                <Avatar className="mr-5">
+        <Card className="w-full min-w-[359px] bg-card">
+            <div className="flex flex-col sm:flex-row sm:items-center p-5">
+                <Avatar className="mr-2 md:mr-5 h-16 w-16 md:h-20 md:w-20">
                     <AvatarFallback className="text-3xl">
                         {initials}
                     </AvatarFallback>
                 </Avatar>
 
-                <div className="w-full">
+                <div className="flex-grow p-2 sm:p-0">
                     <h1 className="font-semibold text-lg">{capFullName}</h1>
                     <p>{message}</p>
-                    <div className="flex flex-row justify-start items-center">
+                    <div className="flex flex-row items-center my-2 sm:my-0">
                         <TooltipProvider>
                             <Tooltip>
                                 <TooltipTrigger>
@@ -101,24 +101,28 @@ export default function Lead({ message, email, name, acceptsAll }: LeadProps) {
                                 <HoverCardContent>
                                     This domain will report any email under the
                                     domain as valid. So we cannot verify if the
-                                    email exists.
+                                    email exists, however, we reccomend this
+                                    email based on the company size
                                 </HoverCardContent>
                             </HoverCard>
                         </div>
                     )}
                 </div>
-                {email && (
-                    <HoverCard>
-                        <HoverCardTrigger>
-                            <Button className="text-xs h-8">
-                                Save as lead
-                            </Button>
-                        </HoverCardTrigger>
-                        <HoverCardContent className="w-auto">
-                            <p>Coming soon</p>
-                        </HoverCardContent>
-                    </HoverCard>
-                )}
+
+                <div className="w-full sm:w-auto mt-4 sm:mt-0">
+                    {email && (
+                        <HoverCard>
+                            <HoverCardTrigger>
+                                <Button className="text-xs h-8 w-full sm:w-auto">
+                                    Save as lead
+                                </Button>
+                            </HoverCardTrigger>
+                            <HoverCardContent className="w-auto">
+                                <p>Coming soon</p>
+                            </HoverCardContent>
+                        </HoverCard>
+                    )}
+                </div>
             </div>
         </Card>
     );

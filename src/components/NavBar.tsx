@@ -3,7 +3,7 @@ import { ModeToggle } from "./mode-toggle";
 
 function NavBar() {
     return (
-        <nav className="bg-background">
+        <nav className="bg-background border-b">
             <div className="flex justify-between items-center">
                 <Link to="/">
                     <h2 className="text-2xl font-bold md:m-4 m-2 font-mono">

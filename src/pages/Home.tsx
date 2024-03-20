@@ -43,8 +43,8 @@ function Home() {
     };
     //dark:bg-zinc-900
     return (
-        <div className="h-screen flex justify-center md:pt-4 bg-[#F7F9FA] dark:bg-background ">
-            <div className="md:max-w-xl w-full m-4">
+        <div className="h-screen min-w-32 flex-shrink-0 flex justify-center md:pt-4 bg-[#F7F9FA] dark:bg-background mx-2">
+            <div className="md:max-w-xl w-full m-4 md:p-0 p-3">
                 <SearchBar setEmailResponse={setEmailResponse} />
                 {verificationResponse &&
                     getResponseMessage(verificationResponse)}
