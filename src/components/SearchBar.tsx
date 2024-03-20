@@ -15,6 +15,12 @@ import {
 } from "@/components/ui/select";
 import { HelpCircle, AlertCircle } from "lucide-react";
 import { ErrorCard } from "@/components/ui/errorCard";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 function emailFormat(
     employeeName: string,
@@ -91,19 +97,28 @@ function SearchBar({ setEmailResponse }: SearchBarProps) {
     return (
         <form onSubmit={handleSubmit} className="flex flex-col w-full py-3">
             <div className="flex flex-row justify-between items-center mb-3">
-                <Select
-                    onValueChange={setSelectedSize}
-                    defaultValue={selectedSize}
-                >
-                    <SelectTrigger className="flex-none w-auto h-8 focus:outline-none">
-                        <SelectValue placeholder="Company Size" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectItem value="1">1-50</SelectItem>
-                        <SelectItem value="2">51-1000</SelectItem>
-                        <SelectItem value="3">1001+</SelectItem>
-                    </SelectContent>
-                </Select>
+                <TooltipProvider>
+                    <Tooltip>
+                        <TooltipTrigger>
+                            <Select
+                                onValueChange={setSelectedSize}
+                                defaultValue={selectedSize}
+                            >
+                                <SelectTrigger className="flex-none w-auto h-8 focus:outline-none">
+                                    <SelectValue placeholder="Company Size" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="1">1-50</SelectItem>
+                                    <SelectItem value="2">51-1000</SelectItem>
+                                    <SelectItem value="3">1001+</SelectItem>
+                                </SelectContent>
+                            </Select>
+                        </TooltipTrigger>
+                        <TooltipContent className="p-2">
+                            <p>Select estimated number of employees</p>
+                        </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
 
                 <Popover>
                     <PopoverTrigger>
@@ -113,6 +128,9 @@ function SearchBar({ setEmailResponse }: SearchBarProps) {
                         Enter an <em>employee name</em> and their company{" "}
                         <em>website</em> to generate and verify an email address
                         for this person
+                        <div className="border my-3"></div>
+                        Select the estimated <em>company size</em> to generate
+                        the most accurate email
                     </PopoverContent>
                 </Popover>
             </div>

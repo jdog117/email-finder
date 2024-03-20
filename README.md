@@ -36,8 +36,9 @@ Read below to learn more about that wild journey.
 
 # Feature Requests
 
--   [x] Use email format patterns based on a companie's size to suggest multiple emails
+-   [x] Use email format patterns based on a companie's size to suggest appropriate email
 -   [ ] Account creation and lead saving
+-   [ ] Scrape domain website for any email to verify email domain
 
 # What I Learned
 
