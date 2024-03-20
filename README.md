@@ -2,7 +2,7 @@
 
 [Email Finder](https://email-finder-jc.vercel.app) is a free website that generates and validates email addresses of employees.
 
-<img src="docs/img/site-bigger.png" alt="Banner">
+<img src="docs/img/site-bigger2.png" alt="Banner">
 
 It allows you to check if an email address exists for any employee without having to send a blind email out. Helpful for reaching out to recruiters or employees when applying for jobs. \
 Check out the documentation [here](docs/email-verification-doc.md) to see how my verification server works.
@@ -82,7 +82,7 @@ Now I could create the cirtificate and run my server securly.
 I edited the IP tables to close the ports I previously used, 3001 and 80 (HTTP), and opened port 443 for HTTPS. To my astonishment Email Finder was working perfectly in production and my struggles were finally over.
 
 <p align="center">
-    <img src="docs/img/email-finder-example.png" width="500">
+    <img src="docs/img/email-finder-example2.png" width="500">
 </p>
 
 What did I learn? Well, that I completely underestimated the backend for this site and that I could have profited greatly from an extra hour or two of research before starting this escapade ;)
