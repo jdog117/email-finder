@@ -20,9 +20,9 @@ Read below to learn more about that wild journey.
 # Features
 
 -   Responsive design
--   Dynamic React elements
 -   Custom secure server
 -   Color themes
+-   Input validation
 
 # Tech
 
@@ -36,7 +36,7 @@ Read below to learn more about that wild journey.
 
 # Feature Requests
 
--   [ ] Use email format patterns based on a companie's size to suggest multiple emails
+-   [x] Use email format patterns based on a companie's size to suggest multiple emails
 -   [ ] Account creation and lead saving
 
 # What I Learned

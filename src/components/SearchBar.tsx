@@ -13,7 +13,8 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { HelpCircle } from "lucide-react";
+import { HelpCircle, AlertCircle } from "lucide-react";
+import { ErrorCard } from "@/components/ui/errorCard";
 
 function emailFormat(
     employeeName: string,
@@ -51,6 +52,7 @@ function SearchBar({ setEmailResponse }: SearchBarProps) {
     const [employeeName, setEmployeeName] = useState("");
     const [website, setWebsite] = useState("");
     const [selectedSize, setSelectedSize] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleWebsiteChange = (
         event: React.ChangeEvent<HTMLInputElement>
@@ -63,28 +65,27 @@ function SearchBar({ setEmailResponse }: SearchBarProps) {
         event: React.ChangeEvent<HTMLInputElement>
     ) => {
         setEmployeeName(event.target.value);
-        // validate input HERE
     };
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-
         if (website === "" || employeeName === "") {
             return;
         }
-
         const size = selectedSize === "" ? "1" : selectedSize; // selects first company size if none is selected
-        const newEmail = emailFormat(employeeName, website, size);
-        console.log(newEmail);
-        console.log(
-            `https://ninamori.us/verifyEmail?website=${website}&personName=${employeeName}&email=${newEmail}`
-        );
 
-        const response = await fetch(
-            `https://ninamori.us/verifyEmail?website=${website}&personName=${employeeName}&email=${newEmail}`
-        );
-        const data = await response.json();
-        setEmailResponse(data);
+        // if no full name and company size is greater than 50 then ask for full name
+        if (employeeName.split(" ").length === 1 && size != "1") {
+            setErrorMessage("Enter a full name for a company of this size");
+        } else {
+            setErrorMessage("");
+            const newEmail = emailFormat(employeeName, website, size);
+            const response = await fetch(
+                `https://ninamori.us/verifyEmail?website=${website}&personName=${employeeName}&email=${newEmail}`
+            );
+            const data = await response.json();
+            setEmailResponse(data);
+        }
     };
 
     return (
@@ -143,6 +144,14 @@ function SearchBar({ setEmailResponse }: SearchBarProps) {
                     <span className="hidden md:inline">Find</span>
                 </Button>
             </div>
+            {errorMessage && (
+                <ErrorCard className="my-4">
+                    <div className="p-3 items-center flex flex-row dark:bg-red-900 dark:text-red-50">
+                        <AlertCircle strokeWidth="1" color="red" size={17} />
+                        <p className="px-3 py-1">{errorMessage}</p>
+                    </div>
+                </ErrorCard>
+            )}
         </form>
     );
 }
