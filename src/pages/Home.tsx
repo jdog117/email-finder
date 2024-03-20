@@ -1,13 +1,8 @@
 import SearchBar from "@/components/SearchBar";
 import { useState } from "react";
 import { ErrorCard } from "@/components/ui/errorCard";
-import { AlertCircle, HelpCircle } from "lucide-react";
+import { AlertCircle } from "lucide-react";
 import Lead from "@/components/Lead";
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover";
 
 function Home() {
     interface Response {
@@ -46,19 +41,10 @@ function Home() {
             );
         }
     };
+    //dark:bg-zinc-900
     return (
-        <div className="h-screen flex justify-center md:pt-4 bg-[#F7F9FA] dark:bg-zinc-900 ">
+        <div className="h-screen flex justify-center md:pt-4 bg-[#F7F9FA] dark:bg-background ">
             <div className="md:max-w-xl w-full m-4">
-                <Popover>
-                    <PopoverTrigger>
-                        <HelpCircle strokeWidth="1" size={17} />
-                    </PopoverTrigger>
-                    <PopoverContent>
-                        Enter an <em>employee name</em> and their company{" "}
-                        <em>website</em> to generate and verify an email address
-                        for this person
-                    </PopoverContent>
-                </Popover>
                 <SearchBar setEmailResponse={setEmailResponse} />
                 {verificationResponse &&
                     getResponseMessage(verificationResponse)}
