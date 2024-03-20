@@ -38,7 +38,8 @@ Read below to learn more about that wild journey.
 
 -   [x] Use email format patterns based on a companie's size to suggest appropriate email
 -   [ ] Account creation and lead saving
--   [ ] Scrape domain website for any email to verify email domain
+-   [ ] Backend - scrape domain website for any email to verify email domain
+-   [ ] Backend - try multiple emails based on size and return whichever one is true, otherwise return most common as before
 
 # What I Learned
 

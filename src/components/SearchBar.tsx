@@ -138,7 +138,7 @@ function SearchBar({ setEmailResponse }: SearchBarProps) {
                 <input
                     value={employeeName}
                     onChange={handleEmployeeNameChange}
-                    className="flex w-1/2 min-w-32 h-10 border border-input bg-background rounded-l-sm px-3 py-8 text-sm placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed"
+                    className="flex w-1/2 h-10 border border-input bg-background rounded-l-sm px-3 py-8 text-sm placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed"
                     placeholder="employee name"
                     type="text"
                 ></input>
@@ -148,7 +148,7 @@ function SearchBar({ setEmailResponse }: SearchBarProps) {
                 <input
                     value={website}
                     onChange={handleWebsiteChange}
-                    className="flex w-1/2 min-w-32 h-10 border border-input bg-background rounded-r-sm px-3 py-8 text-sm placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed"
+                    className="flex w-1/2 h-10 border border-input bg-background rounded-r-sm px-3 py-8 text-sm placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed"
                     placeholder="company.com"
                     type="text"
                 ></input>

@@ -6,7 +6,7 @@ function NavBar() {
         <nav className="bg-background border-b">
             <div className="flex justify-between items-center">
                 <Link to="/">
-                    <h2 className="text-2xl font-bold md:m-4 m-2 font-mono">
+                    <h2 className="md:text-2xl text-lg font-bold md:m-4 m-2 font-mono">
                         EMAIL FINDER
                     </h2>
                 </Link>
