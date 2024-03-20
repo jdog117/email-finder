@@ -17,7 +17,7 @@ import {
     HoverCardContent,
     HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 
 interface LeadProps {
     message: string;
@@ -39,7 +39,7 @@ export default function Lead({ message, email, name, acceptsAll }: LeadProps) {
     );
     return (
         //change two columns
-        <Card className="w-full">
+        <Card className="w-full bg-card">
             <div className="flex flex-row items-center p-5">
                 <Avatar className="mr-5">
                     <AvatarFallback className="text-3xl">

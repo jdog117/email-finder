@@ -2,12 +2,10 @@ const dns = require("dns");
 const net = require("net");
 const { promisify } = require("util");
 
-const lookup = promisify(dns.lookup);
-const resolveMx = promisify(dns.resolveMx);
-async function verifyEmail(website, personName) {
-    //const email = `${personName.split(' ').join('.').replace(/\s/g, "")}@${website}`; //first.last@website.com
+async function verifyEmail(website, personName, newEmail) {
+    const lookup = promisify(dns.lookup);
+    const resolveMx = promisify(dns.resolveMx);
     let verifyResponse = {};
-    const emailFirstName = `${personName.split(" ")[0]}@${website}`; // first@website.com
 
     // Domain check
     try {
@@ -70,7 +68,7 @@ async function verifyEmail(website, personName) {
                     error: false,
                     success: true,
                     message: {
-                        email: emailFirstName,
+                        email: newEmail,
                         acceptsAll: true,
                         body: "",
                         fullName: personName,
@@ -79,7 +77,7 @@ async function verifyEmail(website, personName) {
                 resolve(verifyResponse); // accepts all
             } else if (step === 3) {
                 // Server does not accept all emails, proceed with normal verification
-                socket.write(`RCPT TO:<${emailFirstName}>\r\n`);
+                socket.write(`RCPT TO:<${newEmail}>\r\n`);
                 step++;
             } else if (
                 (data.startsWith("250") || data.startsWith("251")) &&
@@ -90,7 +88,7 @@ async function verifyEmail(website, personName) {
                     error: false,
                     success: true,
                     message: {
-                        email: emailFirstName,
+                        email: newEmail,
                         acceptsAll: false,
                         body: "",
                         fullName: personName,

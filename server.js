@@ -10,10 +10,10 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/verifyEmail", async (req, res) => {
-    const { website, personName } = req.query;
+    const { website, personName, email } = req.query;
 
     try {
-        const verifiedEmail = await verifyEmail(website, personName);
+        const verifiedEmail = await verifyEmail(website, personName, email);
         console.log(verifiedEmail);
         res.status(200).json(verifiedEmail);
     } catch (error) {
