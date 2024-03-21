@@ -88,6 +88,10 @@ export default function Lead({ message, email, name, acceptsAll }: LeadProps) {
                                         SMTP Check: <span className="text-green-700">PASS</span> <br />
                                         Accept All:&nbsp;&nbsp;&nbsp;&nbsp;<span className={acceptsAll ? "text-orange-400" : "text-green-700"}>{acceptsAll ? "TRUE" : "FALSE"}</span>
                                     </p>
+                                        <div className="border mt-3"></div>
+                                        <p className="text-orange-400 font-thin mt-1">
+                                            All email formats tested
+                                        </p>
                                     </PopoverContent>
                                 </Popover>
                             )}

@@ -48,7 +48,7 @@ Read below to learn more about that wild journey.
 -   Responsive design with Tailwind
 -   Testing with Vite and React
 
-# Hosting is easy right?
+# Hosting is simple right?
 
 So I thought, but it turns out there's a lot more nuance to it than I anticipated. The amount of iterations and late nights had me feeling like I was back in school again.
 

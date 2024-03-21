@@ -124,8 +124,8 @@ function SearchBar({ setEmailResponse, sendIsLoading }: SearchBarProps) {
         const size = selectedSize === "" ? "1" : selectedSize; // selects first company size if none is selected
 
         // if no full name and company size is greater than 50 then ask for full name
-        if (employeeName.split(" ").length === 1 && size != "1") {
-            setErrorMessage("Enter a full name for a company of this size");
+        if (employeeName.trim().split(" ").length === 1 && size != "1") {
+            setErrorMessage("Full name needed for this company");
         } else {
             setErrorMessage("");
             setIsLoading(true);
