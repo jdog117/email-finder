@@ -22,7 +22,7 @@ Read below to learn more about that wild journey.
 -   Responsive design
 -   Custom secure server
 -   Color themes
--   Input validation
+-   Input response & validation
 
 # Tech
 

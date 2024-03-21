@@ -21,6 +21,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
+import SkeletonLead from "./SkeletonLead";
 
 function emailFormat(
     employeeName: string,
@@ -34,8 +35,48 @@ function emailFormat(
         return emailFirst;
     } else if (selectedSize === "2") {
         return emailFLast;
-    } else if (selectedSize === "3") {
+    } else {
         return emailFirstDotLast;
+    }
+}
+
+async function verifyEmail(
+    website: string,
+    employeeName: string,
+    size: string
+) {
+    let newEmail = emailFormat(employeeName, website, size);
+    let response = await fetch(
+        `https://ninamori.us/verifyEmail?website=${website}&personName=${employeeName}&email=${newEmail}`
+    );
+    const firstData = await response.json();
+    let secondData = null;
+
+    // if the first email failed, try next best, else return first best
+    if (size === "2" && firstData.success && firstData.email === null) {
+        newEmail = emailFormat(employeeName, website, "3");
+        response = await fetch(
+            `https://ninamori.us/verifyEmail?website=${website}&personName=${employeeName}&email=${newEmail}`
+        );
+        secondData = await response.json();
+        if (secondData.success && secondData.email === null) {
+            return firstData;
+        } else {
+            return secondData;
+        }
+    } else if (size === "3" && firstData.success && firstData.email === null) {
+        newEmail = emailFormat(employeeName, website, "2");
+        response = await fetch(
+            `https://ninamori.us/verifyEmail?website=${website}&personName=${employeeName}&email=${newEmail}`
+        );
+        secondData = await response.json();
+        if (secondData.success && secondData.email === null) {
+            return firstData;
+        } else {
+            return secondData;
+        }
+    } else {
+        return firstData;
     }
 }
 
@@ -55,10 +96,10 @@ interface SearchBarProps {
 }
 
 function SearchBar({ setEmailResponse }: SearchBarProps) {
-    const [employeeName, setEmployeeName] = useState("");
-    const [website, setWebsite] = useState("");
     const [selectedSize, setSelectedSize] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const [employeeName, setEmployeeName] = useState("");
+    const [website, setWebsite] = useState("");
 
     const handleWebsiteChange = (
         event: React.ChangeEvent<HTMLInputElement>
@@ -73,6 +114,7 @@ function SearchBar({ setEmailResponse }: SearchBarProps) {
         setEmployeeName(event.target.value);
     };
 
+    const [isLoading, setIsLoading] = useState(false);
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         if (website === "" || employeeName === "") {
@@ -85,11 +127,9 @@ function SearchBar({ setEmailResponse }: SearchBarProps) {
             setErrorMessage("Enter a full name for a company of this size");
         } else {
             setErrorMessage("");
-            const newEmail = emailFormat(employeeName, website, size);
-            const response = await fetch(
-                `https://ninamori.us/verifyEmail?website=${website}&personName=${employeeName}&email=${newEmail}`
-            );
-            const data = await response.json();
+            setIsLoading(true);
+            const data = await verifyEmail(website, employeeName, size);
+            setIsLoading(false);
             setEmailResponse(data);
         }
     };
@@ -162,6 +202,7 @@ function SearchBar({ setEmailResponse }: SearchBarProps) {
                     <span className="hidden md:inline">Find</span>
                 </Button>
             </div>
+            {isLoading ? <SkeletonLead /> : null}
             {errorMessage && (
                 <ErrorCard className="my-4">
                     <div className="p-3 items-center flex flex-row dark:bg-red-900 dark:text-red-50">
