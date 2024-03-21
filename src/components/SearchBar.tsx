@@ -174,6 +174,7 @@ function SearchBar({ setEmailResponse }: SearchBarProps) {
                     </PopoverContent>
                 </Popover>
             </div>
+
             <div className="flex w-full">
                 <input
                     value={employeeName}
@@ -202,7 +203,9 @@ function SearchBar({ setEmailResponse }: SearchBarProps) {
                     <span className="hidden md:inline">Find</span>
                 </Button>
             </div>
+
             {isLoading ? <SkeletonLead /> : null}
+
             {errorMessage && (
                 <ErrorCard className="my-4">
                     <div className="p-3 items-center flex flex-row dark:bg-red-900 dark:text-red-50">
