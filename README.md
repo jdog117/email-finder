@@ -1,6 +1,6 @@
 # Email Finder
 
-[Email Finder](https://email-finder-jc.vercel.app) is website that finds an email addresses from a name and company.
+[Email Finder](https://email-finder-jc.vercel.app) lets you find an email addresses from a name and company.
 
 <img src="docs/img/site-bigger2.png" alt="Banner">
 
