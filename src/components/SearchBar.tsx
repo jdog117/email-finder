@@ -93,9 +93,10 @@ interface Response {
 
 interface SearchBarProps {
     setEmailResponse: (data: Response) => void;
+    sendIsLoading: (isLoading: boolean) => void;
 }
 
-function SearchBar({ setEmailResponse }: SearchBarProps) {
+function SearchBar({ setEmailResponse, sendIsLoading }: SearchBarProps) {
     const [selectedSize, setSelectedSize] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const [employeeName, setEmployeeName] = useState("");
@@ -128,8 +129,10 @@ function SearchBar({ setEmailResponse }: SearchBarProps) {
         } else {
             setErrorMessage("");
             setIsLoading(true);
+            sendIsLoading(true);
             const data = await verifyEmail(website, employeeName, size);
             setIsLoading(false);
+            sendIsLoading(false);
             setEmailResponse(data);
         }
     };

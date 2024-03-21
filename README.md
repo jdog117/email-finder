@@ -37,9 +37,9 @@ Read below to learn more about that wild journey.
 # Feature Requests
 
 -   [x] Use email format patterns based on a companie's size to suggest appropriate email
+-   [x] Backend - try multiple emails based on size and return whichever one is true, otherwise return most common as before
 -   [ ] Account creation and lead saving
 -   [ ] Backend - scrape domain website for any email to verify email domain
--   [ ] Backend - try multiple emails based on size and return whichever one is true, otherwise return most common as before
 
 # What I Learned
 

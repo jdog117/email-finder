@@ -19,7 +19,7 @@ function Home() {
     const [verificationResponse, setEmailResponse] = useState<Response | null>(
         null
     );
-
+    const [isLoading, setIsLoading] = useState(false);
     const getResponseMessage = (response: Response) => {
         if (response.error) {
             return (
@@ -44,8 +44,12 @@ function Home() {
     return (
         <div className="h-screen flex-shrink-0 flex justify-center md:pt-4 bg-[#F7F9FA] dark:bg-background">
             <div className="md:max-w-xl w-full m-4 md:p-0 p-1">
-                <SearchBar setEmailResponse={setEmailResponse} />
-                {verificationResponse &&
+                <SearchBar
+                    setEmailResponse={setEmailResponse}
+                    sendIsLoading={setIsLoading}
+                />
+                {!isLoading &&
+                    verificationResponse &&
                     getResponseMessage(verificationResponse)}
             </div>
         </div>
