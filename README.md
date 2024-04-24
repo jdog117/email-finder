@@ -4,7 +4,7 @@
 
 <img src="docs/img/site-bigger2.png" alt="Banner">
 
-It allows you to check if an email address exists for any employee without having to send a blind email out. Helpful for reaching out to recruiters or employees when applying for jobs. \
+Verify if an email address exists for any employee without having to guess. Helpful for reaching out to recruiters or employees when applying for jobs. \
 Check out the documentation [here](docs/email-verification-doc.md) to see how my verification server works.
 
 # Motivation
