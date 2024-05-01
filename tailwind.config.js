@@ -3,7 +3,6 @@
 module.exports = {
     darkMode: ["class"],
     mode: "jit",
-    //purge: [], //ADD - to purge unused css for production
     content: [
         "./pages/**/*.{ts,tsx}",
         "./components/**/*.{ts,tsx}",
